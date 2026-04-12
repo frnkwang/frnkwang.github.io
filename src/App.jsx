@@ -10,7 +10,7 @@ import CodePage from "./pages/Code.jsx";
 import JournalPage from "./pages/Journal.jsx";
 import MusicPage from "./pages/Music.jsx";
 
-const APP_MAX_WIDTH = "1080px";
+const APP_MAX_WIDTH = "800px";
 
 const PAGES = [
   {

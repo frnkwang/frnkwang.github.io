@@ -1,13 +1,24 @@
-import { useState } from "react";
-
 function HomePage() {
-  const [count, setCount] = useState(0);
-
   return (
     <div>
-      <h1>Home Page</h1>
-      <p>Welcome to the home page!</p>
-      <button onClick={() => setCount(count + 1)}>Count: {count}</button>
+      <p className="fs-6">
+        Hi! My name is Frank Wang.
+        <br />
+        <br />
+        I'm a software engineer in the greater Philly area, currently working in
+        fintech. I mostly work on system engineering and distributed systems. I
+        typically steer away from frontend, but I did what I could for this
+        site.
+        <br />
+        <br />
+        I've been playing violin for about 16 years, which led me to becoming
+        interested in composition and music theory. I also run and bike
+        casually.
+        <br />
+        <br />
+        This website is an excuse for me to practice frontend by dumping random
+        things about myself online.
+      </p>
     </div>
   );
 }

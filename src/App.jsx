@@ -7,10 +7,11 @@ import HomePage from "./pages/Home.jsx";
 import AboutPage from "./pages/About.jsx";
 import BlogPage from "./pages/Blog.jsx";
 import CodePage from "./pages/Code.jsx";
-import JournalPage from "./pages/Journal.jsx";
 import MusicPage from "./pages/Music.jsx";
+import ReadingPage from "./pages/Reading.jsx";
+import JournalPage from "./pages/Journal.jsx";
 
-const APP_MAX_WIDTH = "800px";
+const APP_MAX_WIDTH = "900px";
 
 const PAGES = [
   {
@@ -37,6 +38,11 @@ const PAGES = [
     name: "Music",
     path: "/music",
     component: MusicPage,
+  },
+  {
+    name: "Reading",
+    path: "/reading",
+    component: ReadingPage,
   },
   {
     name: "Journal",

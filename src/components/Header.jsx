@@ -2,6 +2,8 @@ import { LinkContainer } from "react-router-bootstrap";
 import { useLocation } from "react-router-dom";
 import { Navbar, Nav } from "react-bootstrap";
 
+import "./Header.css";
+
 function getNavElement(name, path) {
   return (
     <LinkContainer to={path} key={name}>

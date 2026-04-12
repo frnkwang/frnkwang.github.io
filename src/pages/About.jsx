@@ -73,7 +73,7 @@ function AboutPage() {
         time playing Nintendo games.
         <br />
         <br />
-        <img src="/src/assets/frank.jpg" alt="My Image" className="img-fluid" />
+        <img src="src/assets/frank.jpg" alt="My Image" className="img-fluid" />
         <br />
         <br />I credit some of my friends for inspiring me to make this website:
         <ul>

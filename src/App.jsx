@@ -1,6 +1,7 @@
 // import "./App.css";
 
 import { Routes, Route } from "react-router-dom";
+import { Container } from "react-bootstrap";
 import Header from "./components/Header.jsx";
 import HomePage from "./pages/Home.jsx";
 import AboutPage from "./pages/About.jsx";
@@ -9,7 +10,9 @@ import CodePage from "./pages/Code.jsx";
 import JournalPage from "./pages/Journal.jsx";
 import MusicPage from "./pages/Music.jsx";
 
-const pages = [
+const APP_MAX_WIDTH = "1080px";
+
+const PAGES = [
   {
     name: "Home",
     path: "/",
@@ -48,12 +51,12 @@ function getRoute(name, path, component) {
 
 function App() {
   return (
-    <div>
-      <Header pages={pages} />
+    <Container style={{ maxWidth: APP_MAX_WIDTH }}>
+      <Header pages={PAGES} />
       <Routes>
-        {pages.map((page) => getRoute(page.name, page.path, page.component))}
+        {PAGES.map((page) => getRoute(page.name, page.path, page.component))}
       </Routes>
-    </div>
+    </Container>
   );
 }
 

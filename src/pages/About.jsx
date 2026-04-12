@@ -27,8 +27,9 @@ function AboutPage() {
         minoring in music and math.
         <br />
         <br />
-        At Michigan, I was once the VP of internal affairs for make, as well a
-        mobile engineering lead for the{" "}
+        At Michigan, I was once the VP of internal affairs for{" "}
+        {makeStyledLink("https://michhackers.com/", "Michigan Hackers")}, as
+        well a mobile engineering lead for the{" "}
         {makeStyledLink("https://www.michigandaily.com/", "Michigan Daily")},
         the student-run newspaper. Additionally, I did research with{" "}
         {makeStyledLink("https://www.umtri.umich.edu/", "UMTRI")} on using CV to
@@ -36,7 +37,7 @@ function AboutPage() {
         university's directory system.
         <br />
         <br />
-        At Michigan, I played violin in the{" "}
+        Additionally, I played violin in the{" "}
         {makeStyledLink(
           "https://www.michiganpops.org/",
           "Michigan Pops Orchestra",
@@ -46,7 +47,7 @@ function AboutPage() {
         {makeStyledLink(
           "https://sites.google.com/a/umich.edu/campus-orchestras/",
           "Campus Symphony Orchestra",
-        )}
+        )}{" "}
         a number of times and partook in the RC chamber music program a few
         times.
         <br />

@@ -5,7 +5,7 @@ import { Navbar, Nav } from "react-bootstrap";
 function getNavElement(name, path) {
   return (
     <LinkContainer to={path} key={name}>
-      <Nav.Link>{name}</Nav.Link>
+      <Nav.Link className="fs-5">{name}</Nav.Link>
     </LinkContainer>
   );
 }
@@ -18,7 +18,9 @@ function getCurrentPageName(pages, pathname) {
 function Header(props) {
   return (
     <Navbar expand="lg">
-      <Navbar.Brand href="/">Frank W.</Navbar.Brand>{" "}
+      <Navbar.Brand href="/">
+        <h3>Frank W.</h3>
+      </Navbar.Brand>
       {getCurrentPageName(props.pages, useLocation().pathname)}
       <Nav className="ms-auto">
         {props.pages.map((page) => getNavElement(page.name, page.path))}

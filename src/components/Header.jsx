@@ -19,14 +19,17 @@ function getCurrentPageName(pages, pathname) {
 
 function Header(props) {
   return (
-    <Navbar expand="lg">
+    <Navbar collapseOnSelect expand="lg">
       <Navbar.Brand href="/">
         <h3>Frank W.</h3>
       </Navbar.Brand>
       {getCurrentPageName(props.pages, useLocation().pathname)}
-      <Nav className="ms-auto">
-        {props.pages.map((page) => getNavElement(page.name, page.path))}
-      </Nav>
+      <Navbar.Toggle className="ms-auto" aria-controls="basic-navbar-nav" />
+      <Navbar.Collapse id="basic-navbar-nav">
+        <Nav className="ms-auto">
+          {props.pages.map((page) => getNavElement(page.name, page.path))}
+        </Nav>
+      </Navbar.Collapse>
     </Navbar>
   );
 }

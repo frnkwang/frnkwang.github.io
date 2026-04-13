@@ -20,7 +20,7 @@ function AboutPage() {
         My name is Frank Wang. I graduated from the University of Michigan in
         2024 (
         {makeStyledLink(
-          "https://en.wikipedia.org/wiki/2023%E2%80%9324_College_Football_Playoff",
+          "https://mgoblue.com/news/2024/1/8/football-mission-accomplished-u-m-takes-down-no-2-washington-to-capture-cfp-national-championship",
           "go blue",
         )}
         ), majoring in Computer Science through the College of Engineering,
@@ -34,16 +34,13 @@ function AboutPage() {
         the student-run newspaper. Additionally, I did research with{" "}
         {makeStyledLink("https://www.umtri.umich.edu/", "UMTRI")} on using CV to
         identify motion sickness, and I worked on developing MCommunity, the
-        university's directory system.
-        <br />
-        <br />
-        Additionally, I played violin in the{" "}
+        university's directory system. Outside of computer science stuff, I
+        played violin in the{" "}
         {makeStyledLink(
           "https://www.michiganpops.org/",
           "Michigan Pops Orchestra",
         )}
-        , where I made the majority of my friends. I also played several times
-        with the{" "}
+        , where I made the majority of my friends. I also played with the{" "}
         {makeStyledLink(
           "https://sites.google.com/a/umich.edu/campus-orchestras/",
           "Campus Symphony Orchestra",

@@ -1,4 +1,6 @@
-function HomePage() {
+import RecentPagesDisplay from "../components/RecentPagesDisplay.jsx";
+
+export function HomePage() {
   return (
     <div>
       <p className="fs-6">
@@ -19,6 +21,8 @@ function HomePage() {
         This website is an excuse for me to practice frontend by dumping random
         things about myself online.
       </p>
+      <h4>Recent Pages</h4>
+      <RecentPagesDisplay props={{ searchDir: null, maxEntries: 10 }} />
     </div>
   );
 }

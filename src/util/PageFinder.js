@@ -3,30 +3,27 @@ import { capitalizeFirstLetter } from "../util/StringUtils";
 const PAGES_DIR = "/src/pages";
 // vite import.meta.glob only works with compile-time literals.
 // We get all the recent pages and filter them down.
-const ALL_PAGES = Object.entries(
+export const ALL_PAGES = Object.entries(
   import.meta.glob("/src/pages/**/*.jsx", {
     eager: true,
   }),
 ).map(([filepath, module]) => {
-  return { filepath: filepath, urlPath: getUrlPath(filepath), module: module };
+  return { 
+    name: capitalizeFirstLetter(filepath.split("/").pop().replace(".jsx", "")),
+    filepath: filepath,
+    urlPath: getUrlPath(filepath),
+    module: module };
 });
 
 // eg, About, Blog, Code, Journal, Music, Reading
 export const SECTION_PAGES = ALL_PAGES.filter(
   (page) => page.filepath.match("^/src/pages/[^/]*\.jsx$") !== null,
-).map((page) => {
-  return {
-    name: capitalizeFirstLetter(
-      page.filepath.split("/").pop().replace(".jsx", ""),
-    ),
-    filepath: page.filepath,
-    urlPath: getUrlPath(page.filepath),
-    module: page.module,
-  };
-});
+);
 
 const SECTION_PAGE_NAMES = SECTION_PAGES.map((page) => page.filepath);
 
+// not intended to be used externally, so not exported.
+// Use findRecentPages with searchDir to get the single pages.
 const SINGLE_PAGES = ALL_PAGES.filter(
   (page) => !SECTION_PAGE_NAMES.includes(page.filepath),
 );

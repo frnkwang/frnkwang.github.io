@@ -1,3 +1,5 @@
+import { RecentPagesDisplay } from "../components/RecentPagesDisplay";
+
 function JournalPage() {
   return (
     <div>
@@ -29,6 +31,9 @@ function JournalPage() {
         can look like - it doesn't need to be formal or structured; it just
         needs to be some sort of record of events or thoughts.
       </p>
+      <RecentPagesDisplay
+        props={{ searchDir: "/src/pages/journal", maxEntries: 5 }}
+      />
     </div>
   );
 }

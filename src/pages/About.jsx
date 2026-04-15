@@ -76,11 +76,11 @@ function AboutPage() {
         <img src={frankImg} alt="My Image" className="img-fluid" />
         <br />
         <br />I credit some of my friends for inspiring me to make this website:
-        <ul>
-          <li>{makeStyledLink("https://albonwu.com/", "Albon Wu")}</li>
-          <li>{makeStyledLink("https://erxclau.me/", "Eric Lau")}</li>
-        </ul>
       </p>
+      <ul>
+        <li>{makeStyledLink("https://albonwu.com/", "Albon Wu")}</li>
+        <li>{makeStyledLink("https://erxclau.me/", "Eric Lau")}</li>
+      </ul>
     </div>
   );
 }

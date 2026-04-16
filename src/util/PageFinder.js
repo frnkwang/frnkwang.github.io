@@ -63,7 +63,10 @@ export function findRecentPages(searchDir, maxEntries) {
     pages = pages.filter((page) => page.filepath.startsWith(searchDir));
   }
 
-  // TODO: sort by date modified and limit to maxEntries
+  pages.sort((a, b) => b.date - a.date);
+  if (maxEntries !== null) {
+    pages = pages.slice(0, maxEntries);
+  }
 
   return pages;
 }

@@ -33,6 +33,13 @@ function JournalPage() {
         randomly selected snippets just to give an example of what journaling
         can look like - it doesn't need to be formal or structured; it just
         needs to be some sort of record of events or thoughts.
+        <br />
+        <br />
+        <i>
+          Note: I've changed all the names in posted entries for privacy
+          reasons. They're consistent within entries but may not be consistent
+          across entries.
+        </i>
       </p>
       <RecentPagesDisplay
         props={{

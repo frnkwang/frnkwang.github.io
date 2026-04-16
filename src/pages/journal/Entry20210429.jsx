@@ -1,7 +1,7 @@
-export const DISPLAY_NAME = "Entry: April 29, 2021";
+export const DISPLAY_NAME = "Entry: April 29th, 2021";
 export const CREATION_DATE = new Date("2021-04-29");
 
-function Entry042921() {
+function Entry20230409() {
   return (
     <div>
       <h5 className="ms-auto">Thursday, 4/29/21</h5>{" "}
@@ -39,4 +39,4 @@ function Entry042921() {
   );
 }
 
-export default Entry042921;
+export default Entry20230409;

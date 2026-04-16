@@ -1,3 +1,6 @@
+export const DISPLAY_NAME = "Code";
+export const CREATION_DATE = new Date("2026-04-12");
+
 function CodePage() {
   return (
     <div>

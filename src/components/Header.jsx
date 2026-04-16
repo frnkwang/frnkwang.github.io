@@ -7,7 +7,7 @@ import "./Header.css";
 
 function getNavElement(name, path) {
   return (
-    <LinkContainer to={path} key={name}>
+    <LinkContainer to={path} key={path}>
       <Nav.Link className="fs-5">{name}</Nav.Link>
     </LinkContainer>
   );

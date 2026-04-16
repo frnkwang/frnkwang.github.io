@@ -1,3 +1,6 @@
+export const DISPLAY_NAME = "Entry: April 29, 2021";
+export const CREATION_DATE = new Date("2021-04-29");
+
 function Entry042921() {
   return (
     <div>

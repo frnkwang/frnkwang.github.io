@@ -1,3 +1,6 @@
+export const DISPLAY_NAME = "Reading";
+export const CREATION_DATE = new Date("2026-04-12");
+
 function ReadingPage() {
   return (
     <div>

@@ -12,7 +12,6 @@ function getRoute(urlPath, module) {
 }
 
 function App() {
-  console.log(ALL_PAGES);
   return (
     <Container style={{ maxWidth: APP_MAX_WIDTH }}>
       <Header />

@@ -1,5 +1,8 @@
 import { RecentPagesDisplay } from "../components/RecentPagesDisplay";
 
+export const DISPLAY_NAME = "Journal";
+export const CREATION_DATE = new Date("2026-04-12");
+
 function JournalPage() {
   return (
     <div>

@@ -9,7 +9,8 @@ export const ALL_PAGES = Object.entries(
   }),
 ).map(([filepath, module]) => {
   return { 
-    name: capitalizeFirstLetter(filepath.split("/").pop().replace(".jsx", "")),
+    name: module.DISPLAY_NAME,
+    date: module.CREATION_DATE,
     filepath: filepath,
     urlPath: getUrlPath(filepath),
     section: getSectionName(filepath),

@@ -5,10 +5,8 @@ function makePageDisplay(page, includeSection = false) {
   // TODO: this could definitely look prettier
   return (
     <li key={page.filepath}>
-      <Link to={page.urlPath}>
-        {includeSection ? `${page.section}: ` : ""}
-        {page.name}
-      </Link>
+      {includeSection ? `${page.section}: ` : ""}
+      <Link to={page.urlPath}>{page.name}</Link>
     </li>
   );
 }
@@ -17,7 +15,6 @@ export function RecentPagesDisplay({ props }) {
   const searchDir = props.searchDir;
   const maxEntries = props.maxEntries;
   const includeSection = props.includeSection;
-  console.log(includeSection);
 
   return (
     <div>

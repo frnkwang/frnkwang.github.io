@@ -8,6 +8,16 @@ export const ALL_PAGES = Object.entries(
     eager: true,
   }),
 ).map(([filepath, module]) => {
+  if (module.DISPLAY_NAME === undefined) {
+    throw new Error(
+      `Page ${filepath} is missing DISPLAY_NAME export.`,
+    );
+  }
+  if (module.CREATION_DATE === undefined) {
+    throw new Error(
+      `Page ${filepath} is missing CREATION_DATE export.`,
+    );
+  }
   return { 
     name: module.DISPLAY_NAME,
     date: module.CREATION_DATE,

@@ -24,7 +24,8 @@ export const ALL_PAGES = Object.entries(
     filepath: filepath,
     urlPath: getUrlPath(filepath),
     section: getSectionName(filepath),
-    module: module };
+    module: module
+  };
 });
 
 // eg, About, Blog, Code, Journal, Music, Reading

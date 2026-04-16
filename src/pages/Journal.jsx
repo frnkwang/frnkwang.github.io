@@ -32,7 +32,11 @@ function JournalPage() {
         needs to be some sort of record of events or thoughts.
       </p>
       <RecentPagesDisplay
-        props={{ searchDir: "/src/pages/journal", maxEntries: 5 }}
+        props={{
+          searchDir: "/src/pages/journal",
+          maxEntries: 5,
+          includeSection: false,
+        }}
       />
     </div>
   );

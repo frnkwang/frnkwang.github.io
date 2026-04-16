@@ -22,7 +22,9 @@ export function HomePage() {
         things about myself online.
       </p>
       <h4>Recent Pages</h4>
-      <RecentPagesDisplay props={{ searchDir: null, maxEntries: 10 }} />
+      <RecentPagesDisplay
+        props={{ searchDir: null, maxEntries: 10, includeSection: true }}
+      />
     </div>
   );
 }

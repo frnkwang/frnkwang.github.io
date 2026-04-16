@@ -12,6 +12,7 @@ export const ALL_PAGES = Object.entries(
     name: capitalizeFirstLetter(filepath.split("/").pop().replace(".jsx", "")),
     filepath: filepath,
     urlPath: getUrlPath(filepath),
+    section: getSectionName(filepath),
     module: module };
 });
 
@@ -35,6 +36,12 @@ function getUrlPath(filepath) {
   }
 
   return filepath.replace(PAGES_DIR, "").replace(".jsx", "").toLowerCase();
+}
+
+function getSectionName(filepath) {
+  // eg, for /src/pages/journal/Entry042921.jsx, returns "Journal"
+  const m = filepath.match("^/src/pages/([^/]*)/[^/]*\.jsx$");
+  return m ? capitalizeFirstLetter(m[1]) : null;
 }
 
 export function findRecentPages(searchDir, maxEntries) {

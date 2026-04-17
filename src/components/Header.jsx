@@ -14,7 +14,7 @@ function getNavElement(name, path) {
 }
 
 function getCurrentPageName(pages, pathname) {
-  const page = pages.find((page) => page.urlpath === pathname);
+  const page = pages.find((p) => p.urlPath === pathname);
   return page ? page.name : "";
 }
 

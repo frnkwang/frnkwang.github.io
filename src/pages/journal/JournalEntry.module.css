@@ -1,0 +1,16 @@
+.entrydate {
+    font-size: 1.5rem;
+    margin: 0px;
+    margin-right: auto;
+}
+
+.entrytime {
+    font-size: 1.5rem;
+    margin: 0px;
+    margin-left: auto;
+}
+
+.signature {
+    font-family: "Brush Script MT", cursive;
+    font-size: 1.5rem
+}

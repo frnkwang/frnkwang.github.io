@@ -1,11 +1,15 @@
+import styles from "./JournalEntry.module.css";
+
 export const DISPLAY_NAME = "Entry: April 29th, 2021";
 export const CREATION_DATE = new Date("2021-04-29");
 
 function Entry20230409() {
   return (
     <div>
-      <h5 className="ms-auto">Thursday, 4/29/21</h5>{" "}
-      <h5 className="me-auto">10:03 PM</h5>
+      <div className="hori">
+        <p className={styles.entrydate}>Thursday, 4/29/21</p>
+        <p className={styles.entrytime}>10:03 PM</p>
+      </div>
       <p>
         Everything is all done now! I finished a final on Monday evening and one
         yesterday evening. Neither of them were too bad, but I’m still a bit
@@ -34,7 +38,7 @@ function Entry20230409() {
         Okay, that’s all. I still do want to keep my sleep schedule, so I don’t
         have to change it dramatically for the internship. So I’ll sleep now.
       </p>
-      Frank Wang
+      <p className={styles.signature}>Frank Wang</p>
     </div>
   );
 }

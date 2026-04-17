@@ -19,7 +19,7 @@ function makeStyledLink(href, text) {
 function AboutPage() {
   return (
     <div>
-      <p className="fs-6">
+      <p>
         My name is Frank Wang. I graduated from the University of Michigan in
         2024 (
         {makeStyledLink(

@@ -1,3 +1,5 @@
+import styles from "./JournalEntry.module.css";
+
 export const DISPLAY_NAME = "Entry: April 9th, 2023";
 export const CREATION_DATE = new Date("2023-04-09");
 
@@ -5,8 +7,10 @@ function Entry20210429() {
   return (
     <div>
       <i>Names have been changed for privacy reasons.</i>
-      <h5 className="ms-auto">Sunday, 4/9/23</h5>{" "}
-      <h5 className="me-auto">11:00 PM</h5>
+      <div className="hori">
+        <h2 className={styles.entrydate}>Sunday, 4/9/23</h2>
+        <h2 className={styles.entrytime}>11:00 PM</h2>
+      </div>
       <p>
         I should sleep soon, mainly for the gym tomorrow morning. But I feel
         like I do want to write more today, so maybe I’ll skip the gym tomorrow.
@@ -101,7 +105,7 @@ function Entry20210429() {
         all the homework/projects early, rest for a few days, then start really
         preparing for finals.
       </p>
-      Frank Wang
+      <p className={styles.signature}>Frank Wang</p>
     </div>
   );
 }

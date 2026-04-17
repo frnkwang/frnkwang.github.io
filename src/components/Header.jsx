@@ -1,15 +1,17 @@
-import { LinkContainer } from "react-router-bootstrap";
-import { useLocation } from "react-router-dom";
-import { Navbar, Nav } from "react-bootstrap";
+import { useLocation, Link } from "react-router-dom";
 import { SECTION_PAGES } from "../util/PageFinder";
 
-import "./Header.css";
+import styles from "./Header.module.css";
 
-function getNavElement(name, path) {
+function getNavElement(name, path, selected) {
   return (
-    <LinkContainer to={path} key={path}>
-      <Nav.Link className="fs-5">{name}</Nav.Link>
-    </LinkContainer>
+    <Link
+      key={name}
+      to={path}
+      className={`${styles.link} center-text fs-3 ${selected ? styles.selected : ""} `}
+    >
+      {name}
+    </Link>
   );
 }
 
@@ -22,21 +24,24 @@ function Header() {
   const sectionPagesNoHome = SECTION_PAGES.filter(
     (page) => page.urlPath !== "/",
   );
+
+  const currentPage = getCurrentPageName(
+    sectionPagesNoHome,
+    useLocation().pathname,
+  );
+
   return (
-    <Navbar collapseOnSelect expand="lg">
-      <Navbar.Brand href="/">
-        <h3>Frank W.</h3>
-      </Navbar.Brand>
-      {getCurrentPageName(sectionPagesNoHome, useLocation().pathname)}
-      <Navbar.Toggle className="ms-auto" aria-controls="basic-navbar-nav" />
-      <Navbar.Collapse id="basic-navbar-nav">
-        <Nav className="ms-auto">
-          {sectionPagesNoHome.map((page) =>
-            getNavElement(page.name, page.urlPath),
-          )}
-        </Nav>
-      </Navbar.Collapse>
-    </Navbar>
+    <div className="hori container">
+      <Link to="/" className={`${styles.link} center-text`}>
+        <h2>Frank W.</h2>
+      </Link>
+      <div className="center-text">{currentPage}</div>
+      <div className="hori container" style={{ marginLeft: "auto" }}>
+        {sectionPagesNoHome.map((page) =>
+          getNavElement(page.name, page.urlPath, page.name === currentPage),
+        )}
+      </div>
+    </div>
   );
 }
 

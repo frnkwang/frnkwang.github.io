@@ -6,7 +6,7 @@ export const CREATION_DATE = new Date("2026-04-12");
 export function HomePage() {
   return (
     <div>
-      <p className="fs-6">
+      <p>
         Hi! My name is Frank Wang.
         <br />
         <br />

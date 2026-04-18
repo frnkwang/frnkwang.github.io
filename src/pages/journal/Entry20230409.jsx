@@ -77,17 +77,18 @@ function Entry20210429() {
         <br /> <br />
         Anyway, some thoughts on Pops now. I think it was definitely a bit rough
         in the weeks before the concert because of getting rejected from board
-        and that whole ordeal with Amy To be completely honest, those two things
-        made me consider dropping Pops next year. But after resolving the thing
-        with Amy, and especially after yesterday’s concert, there’s no way I’d
-        drop Pops. I guess I’d somehow just completely forgotten how stupidly
-        fun it is. I get to play violin (which itself might not be that fun)
-        with a ton of friends, be part of making awesome music, and laugh at all
-        the stupid cringe things we do. It combines the hardworking, diligent
-        side of me, the one that worked so hard to get into PYO, with the dumb,
-        silly side of me that just wants to crack jokes with (and sometimes at)
-        friends. Maybe that’s why I enjoy it so much. And that’s compounded by
-        the fact that all the other Popsicles are similar in that sense. Hm...
+        and that whole ordeal with Amy. To be completely honest, those two
+        things made me consider dropping Pops next year. But after resolving the
+        thing with Amy, and especially after yesterday’s concert, there’s no way
+        I’d drop Pops. I guess I’d somehow just completely forgotten how
+        stupidly fun it is. I get to play violin (which itself might not be that
+        fun) with a ton of friends, be part of making awesome music, and laugh
+        at all the stupid cringe things we do. It combines the hardworking,
+        diligent side of me, the one that worked so hard to get into PYO, with
+        the dumb, silly side of me that just wants to crack jokes with (and
+        sometimes at) friends. Maybe that’s why I enjoy it so much. And that’s
+        compounded by the fact that all the other Popsicles are similar in that
+        sense. Hm...
         <br /> <br />
         I suppose that’s also why making friends there feels easy. I barely knew
         Claire and Steve before this semester, and I think I only talked to

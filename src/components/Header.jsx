@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 
 import { useLocation, Link } from "react-router-dom";
 import { SECTION_PAGES } from "../util/PageFinder";
@@ -7,13 +7,15 @@ import styles from "./Header.module.css";
 
 function getNavElement(name, path, selected) {
   return (
-    <Link
-      key={name}
-      to={path}
-      className={`${styles.link} center-text fs-3 ${selected ? styles.selected : ""} `}
-    >
-      {name}
-    </Link>
+    <li>
+      <Link
+        key={name}
+        to={path}
+        className={`${styles.link} center-text fs-3 ${selected ? styles.selected : ""} `}
+      >
+        {name}
+      </Link>
+    </li>
   );
 }
 
@@ -24,10 +26,27 @@ function getCurrentPageName(pages, pathname) {
 
 function Header() {
   const [isOpen, setIsOpen] = useState(false);
+  const menuRef = useRef(null);
 
-  const toggleMenu = () => {
-    setIsOpen(!isOpen);
-  };
+  useEffect(() => {
+    const handleClick = (event) => {
+      // if clicked outside drawer, close the drawer
+      if (
+        isOpen &&
+        menuRef.current &&
+        !menuRef.current.contains(event.target)
+      ) {
+        setIsOpen(false);
+      }
+    };
+
+    document.addEventListener("mousedown", handleClick);
+
+    // cleanup on unmount
+    return () => {
+      document.removeEventListener("mousedown", handleClick);
+    };
+  }, [isOpen]); // Re-run when isOpen state changes
 
   const sectionPagesNoHome = SECTION_PAGES.filter(
     (page) => page.urlPath !== "/",
@@ -49,8 +68,8 @@ function Header() {
       <div style={{ marginLeft: "auto" }} />
 
       <div
-        className={`${styles.navbar_toggler}`}
-        onClick={toggleMenu}
+        className={`${styles.navbarToggler}`}
+        onClick={() => setIsOpen(!isOpen)}
         aria-expanded={isOpen}
         id="menuToggle"
       >
@@ -62,13 +81,14 @@ function Header() {
         </button>
       </div>
 
-      <div className={`${styles.navbar_collapse} ${isOpen ? styles.show : ""}`}>
-        <div className="hori container">
-          {sectionPagesNoHome.map((page) =>
-            getNavElement(page.name, page.urlPath, page.name === currentPage),
-          )}
-        </div>
-      </div>
+      <ul
+        className={`container ${styles.navbarNav} ${isOpen ? styles.open : ""}`}
+        ref={menuRef}
+      >
+        {sectionPagesNoHome.map((page) =>
+          getNavElement(page.name, page.urlPath, page.name === currentPage),
+        )}
+      </ul>
     </div>
   );
 }

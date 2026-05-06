@@ -17,6 +17,7 @@
   background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent black */
   z-index: 999; /* Higher than page content, lower than side menu */
   cursor: pointer;
+  backdrop-filter: blur(2px);
 }
 
 .navbarToggler {

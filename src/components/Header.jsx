@@ -11,8 +11,22 @@ function getCurrentPageName(pages, pathname) {
 }
 
 function Header() {
-  const [isOpen, setIsOpen] = useState(false);
+  const [isNavDrawerOpen, setIsNavDrawerOpen] = useState(false);
   const menuRef = useRef(null);
+
+  useEffect(() => {
+    if (isNavDrawerOpen) {
+      // lock background scroll
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "unset";
+    }
+
+    // cleanup
+    return () => {
+      document.body.style.overflow = "unset";
+    };
+  }, [isNavDrawerOpen]);
 
   const getNavElement = (name, path, selected) => {
     return (
@@ -21,7 +35,7 @@ function Header() {
           key={name}
           to={path}
           className={`${styles.link} center-text fs-3 ${selected ? styles.selected : ""} `}
-          onClick={() => setIsOpen(false)}
+          onClick={() => setIsNavDrawerOpen(false)}
         >
           {name}
         </Link>
@@ -33,11 +47,11 @@ function Header() {
     const handleClick = (event) => {
       // if clicked outside drawer, close the drawer
       if (
-        isOpen &&
+        isNavDrawerOpen &&
         menuRef.current &&
         !menuRef.current.contains(event.target)
       ) {
-        setIsOpen(false);
+        setIsNavDrawerOpen(false);
       }
     };
 
@@ -47,7 +61,7 @@ function Header() {
     return () => {
       document.removeEventListener("mousedown", handleClick);
     };
-  }, [isOpen]); // Re-run when isOpen state changes
+  }, [isNavDrawerOpen]); // Re-run when isOpen state changes
 
   const sectionPagesNoHome = SECTION_PAGES.filter(
     (page) => page.urlPath !== "/",
@@ -71,8 +85,8 @@ function Header() {
       {/* hamburger to appear on mobile*/}
       <div
         className={styles.navbarToggler}
-        onClick={() => setIsOpen(!isOpen)}
-        aria-expanded={isOpen}
+        onClick={() => setIsNavDrawerOpen(!isNavDrawerOpen)}
+        aria-expanded={isNavDrawerOpen}
         id="menuToggle"
       >
         <button>
@@ -84,7 +98,7 @@ function Header() {
 
       {/* pages. On desktop, list across top. On mobile, openable drawer via hamburger */}
       <ul
-        className={`container ${styles.navbarNav} ${isOpen ? styles.open : ""}`}
+        className={`container ${styles.navbarNav} ${isNavDrawerOpen ? styles.open : ""}`}
         ref={menuRef}
       >
         {sectionPagesNoHome.map((page) =>
@@ -93,8 +107,11 @@ function Header() {
       </ul>
 
       {/* backdrop overlay for mobile drawer */}
-      {isOpen && (
-        <div className={styles.backdrop} onClick={() => setIsOpen(false)} />
+      {isNavDrawerOpen && (
+        <div
+          className={styles.backdrop}
+          onClick={() => setIsNavDrawerOpen(false)}
+        />
       )}
     </div>
   );

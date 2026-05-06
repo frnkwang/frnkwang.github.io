@@ -5,3 +5,25 @@
 .selected {
     font-weight: bold;
 }
+
+.navbar_collapse {
+    display: none;
+    flex-basis: 100%;
+}
+
+.navbar_collapse.show {
+    display: block;
+}
+
+.navbar_toggler {
+    display:grid;
+}
+
+/* desktop */
+@media (min-width: 768px) {
+    .navbar_toggler {display: none;}
+    .navbar_collapse {
+        display: flex !important;
+        flex-basis: auto;
+    }
+}

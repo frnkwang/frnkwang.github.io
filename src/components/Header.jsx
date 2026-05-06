@@ -1,3 +1,5 @@
+import { useState } from "react";
+
 import { useLocation, Link } from "react-router-dom";
 import { SECTION_PAGES } from "../util/PageFinder";
 
@@ -21,6 +23,12 @@ function getCurrentPageName(pages, pathname) {
 }
 
 function Header() {
+  const [isOpen, setIsOpen] = useState(false);
+
+  const toggleMenu = () => {
+    setIsOpen(!isOpen);
+  };
+
   const sectionPagesNoHome = SECTION_PAGES.filter(
     (page) => page.urlPath !== "/",
   );
@@ -36,10 +44,30 @@ function Header() {
         <h2>Frank W.</h2>
       </Link>
       <div className="center-text">{currentPage}</div>
-      <div className="hori container" style={{ marginLeft: "auto" }}>
-        {sectionPagesNoHome.map((page) =>
-          getNavElement(page.name, page.urlPath, page.name === currentPage),
-        )}
+
+      {/* start right align */}
+      <div style={{ marginLeft: "auto" }} />
+
+      <div
+        className={`${styles.navbar_toggler}`}
+        onClick={toggleMenu}
+        aria-expanded={isOpen}
+        id="menuToggle"
+      >
+        <button>
+          {/* hamburger */}
+          <svg width="30" height="30" viewBox="0 0 30 30">
+            <path stroke="white" strokeWidth="2" d="M4 7h22M4 15h22M4 23h22" />
+          </svg>
+        </button>
+      </div>
+
+      <div className={`${styles.navbar_collapse} ${isOpen ? styles.show : ""}`}>
+        <div className="hori container">
+          {sectionPagesNoHome.map((page) =>
+            getNavElement(page.name, page.urlPath, page.name === currentPage),
+          )}
+        </div>
       </div>
     </div>
   );

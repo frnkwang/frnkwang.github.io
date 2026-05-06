@@ -5,20 +5,6 @@ import { SECTION_PAGES } from "../util/PageFinder";
 
 import styles from "./Header.module.css";
 
-function getNavElement(name, path, selected) {
-  return (
-    <li>
-      <Link
-        key={name}
-        to={path}
-        className={`${styles.link} center-text fs-3 ${selected ? styles.selected : ""} `}
-      >
-        {name}
-      </Link>
-    </li>
-  );
-}
-
 function getCurrentPageName(pages, pathname) {
   const page = pages.find((p) => p.urlPath === pathname);
   return page ? page.name : "";
@@ -27,6 +13,21 @@ function getCurrentPageName(pages, pathname) {
 function Header() {
   const [isOpen, setIsOpen] = useState(false);
   const menuRef = useRef(null);
+
+  const getNavElement = (name, path, selected) => {
+    return (
+      <li key={path}>
+        <Link
+          key={name}
+          to={path}
+          className={`${styles.link} center-text fs-3 ${selected ? styles.selected : ""} `}
+          onClick={() => setIsOpen(false)}
+        >
+          {name}
+        </Link>
+      </li>
+    );
+  };
 
   useEffect(() => {
     const handleClick = (event) => {
@@ -67,20 +68,21 @@ function Header() {
       {/* start right align */}
       <div style={{ marginLeft: "auto" }} />
 
+      {/* hamburger to appear on mobile*/}
       <div
-        className={`${styles.navbarToggler}`}
+        className={styles.navbarToggler}
         onClick={() => setIsOpen(!isOpen)}
         aria-expanded={isOpen}
         id="menuToggle"
       >
         <button>
-          {/* hamburger */}
           <svg width="30" height="30" viewBox="0 0 30 30">
             <path stroke="white" strokeWidth="2" d="M4 7h22M4 15h22M4 23h22" />
           </svg>
         </button>
       </div>
 
+      {/* pages. On desktop, list across top. On mobile, openable drawer via hamburger */}
       <ul
         className={`container ${styles.navbarNav} ${isOpen ? styles.open : ""}`}
         ref={menuRef}
@@ -89,6 +91,11 @@ function Header() {
           getNavElement(page.name, page.urlPath, page.name === currentPage),
         )}
       </ul>
+
+      {/* backdrop overlay for mobile drawer */}
+      {isOpen && (
+        <div className={styles.backdrop} onClick={() => setIsOpen(false)} />
+      )}
     </div>
   );
 }

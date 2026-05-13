@@ -6,9 +6,13 @@ export const CREATION_DATE = new Date("2021-04-29");
 function Entry20230409() {
   return (
     <div>
+      <i>
+        A basic example of one of my earlier entries: very much an undetailed
+        summary of things that have just happened, with few thoughts.
+      </i>
       <div className="hori">
-        <p className={styles.entrydate}>Thursday, 4/29/21</p>
-        <p className={styles.entrytime}>10:03 PM</p>
+        <h2 className={styles.entrydate}>Thursday, 4/29/21</h2>
+        <h2 className={styles.entrytime}>10:03 PM</h2>
       </div>
       <p>
         Everything is all done now! I finished a final on Monday evening and one

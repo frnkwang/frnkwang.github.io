@@ -6,6 +6,11 @@ export const CREATION_DATE = new Date("2023-04-09");
 function Entry20210429() {
   return (
     <div>
+      <i>
+        A longer, more reflective, and much more positive entry recalling a very
+        happy event during college.
+      </i>
+      <br />
       <i>Names have been changed for privacy reasons.</i>
       <div className="hori">
         <h2 className={styles.entrydate}>Sunday, 4/9/23</h2>

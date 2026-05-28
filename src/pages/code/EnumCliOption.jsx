@@ -304,10 +304,11 @@ int main(int argc, char* argv[]) {
 }`}
         />
         Great. Let's try to make just this specific case work for now, and we
-        can generalize afterwards. We'll pretend to be the preprocess right now
-        - we have four inputs (one enum name; three options) and we can place
-        them anywhere in some source code we want to write. Here's the specific
-        implementation I came up with:
+        can generalize afterwards. We'll pretend to be the preprocessor right
+        now - we have four inputs (one enum name; three options) and we can
+        place them anywhere in some source code we want to write. Here's the
+        specific implementation I came up with. In other words, this is what
+        ENUM_COMMAND_LINE_OPTION should expand to:
         <CodeBlock
           language="cpp"
           code={`namespace TestOption{
@@ -396,8 +397,8 @@ namespace name { \\
         One cool thing to notice is that preprocessor macros can also take
         variadic args. In this case, you can't name them - they're always just
         called __VA_ARGS__ and will always expand. Luckily, we can still make
-        use of a FOR_EACH macro to help me loop over the variadic args of the
-        macro and call other macros like PRASE_CASE and TO_STRING_CASE. Under
+        use of a FOR_EACH macro to help us loop over the variadic args of the
+        macro and call other macros like PARSE_CASE and TO_STRING_CASE. Under
         the hood, this uses some other boost macro helpers:
         <CodeBlock
           language="cpp"
@@ -413,7 +414,7 @@ namespace name { \\
         you'd expect it to do!
         <br />
         <br />
-        And that's all it takes! You can check out the final code here:{" "}
+        And that's all it takes. You can check out the final code here:{" "}
         <a
           href="https://github.com/frnkwang/cpp-snippets/tree/main/enum-cli-option"
           target="_blank"

@@ -9,29 +9,41 @@ export const ALL_PAGES = Object.entries(
   }),
 ).map(([filepath, module]) => {
   if (module.DISPLAY_NAME === undefined) {
-    throw new Error(
-      `Page ${filepath} is missing DISPLAY_NAME export.`,
-    );
+    throw new Error(`Page ${filepath} is missing DISPLAY_NAME export.`);
   }
   if (module.CREATION_DATE === undefined) {
-    throw new Error(
-      `Page ${filepath} is missing CREATION_DATE export.`,
-    );
+    throw new Error(`Page ${filepath} is missing CREATION_DATE export.`);
   }
-  return { 
+  return {
     name: module.DISPLAY_NAME,
     date: module.CREATION_DATE,
     filepath: filepath,
     urlPath: getUrlPath(filepath),
     section: getSectionName(filepath),
-    module: module
+    module: module,
   };
 });
 
-// eg, About, Blog, Code, Journal, Music, Reading
-export const SECTION_PAGES = ALL_PAGES.filter(
-  (page) => page.filepath.match("^/src/pages/[^/]*\.jsx$") !== null,
-);
+const SECTION_PAGE_ORDER = [
+  "About",
+  "Blog",
+  "Code",
+  "Journal",
+  "Music",
+  "Consumption",
+];
+export const SECTION_PAGES = SECTION_PAGE_ORDER.map((pageName) => {
+  const sectionPage = ALL_PAGES.find((page) => {
+    return (
+      page.filepath.match("^/src/pages/[^/]*\.jsx$") !== null &&
+      page.name === pageName
+    );
+  });
+  if (sectionPage === undefined) {
+    throw new Error(`Could not find section page ${pageName}.`);
+  }
+  return sectionPage;
+});
 
 const SECTION_PAGE_NAMES = SECTION_PAGES.map((page) => page.filepath);
 

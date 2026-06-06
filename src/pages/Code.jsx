@@ -6,7 +6,6 @@ export const CREATION_DATE = new Date("2026-04-12");
 function CodePage() {
   return (
     <div>
-      <h1>Code Page</h1>
       <p>
         I went to school for computer science, and my day job is being a
         software engineer. I was primarily hired to be a C++ developer, and I do

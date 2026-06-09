@@ -17,6 +17,7 @@ export const ALL_PAGES = Object.entries(
   return {
     name: module.DISPLAY_NAME,
     date: module.CREATION_DATE,
+    image: module.DISPLAY_IMAGE,
     filepath: filepath,
     urlPath: getUrlPath(filepath),
     section: getSectionName(filepath),
@@ -49,8 +50,11 @@ const SECTION_PAGE_NAMES = SECTION_PAGES.map((page) => page.filepath);
 
 // not intended to be used externally, so not exported.
 // Use findRecentPages with searchDir to get the single pages.
+const HOME_PAGE_PATH = "/src/pages/Home.jsx";
 const SINGLE_PAGES = ALL_PAGES.filter(
-  (page) => !SECTION_PAGE_NAMES.includes(page.filepath),
+  (page) =>
+    !SECTION_PAGE_NAMES.includes(page.filepath) &&
+    page.filepath !== HOME_PAGE_PATH,
 );
 
 function getUrlPath(filepath) {

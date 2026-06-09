@@ -1,14 +1,16 @@
 import { Link } from "react-router-dom";
 import { findRecentPages } from "../util/PageFinder";
 
+import styles from "./RecentPagesDisplay.module.css";
+
 function makePageDisplay(page, includeSection = false, useImage = true) {
   return (
-    <div key={page.filepath} className="card">
+    <div key={page.filepath} className={styles.card}>
       <Link to={page.urlPath}>
         {useImage && (
-          <img src={page.image} alt={page.name} className="card-image" />
+          <img src={page.image} alt={page.name} className={styles.cardImage} />
         )}
-        <div className="card-content">
+        <div className={styles.cardContent}>
           {includeSection ? `${page.section}: ` : ""}
           {page.name}
         </div>

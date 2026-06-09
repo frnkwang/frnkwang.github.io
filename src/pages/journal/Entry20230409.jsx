@@ -1,6 +1,8 @@
 import styles from "./JournalEntry.module.css";
+import img from "../../assets/journal.png";
 
 export const DISPLAY_NAME = "Entry: April 9th, 2023";
+export const DISPLAY_IMAGE = img;
 export const CREATION_DATE = new Date("2023-04-09");
 
 function Entry20210429() {

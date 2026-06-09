@@ -1,4 +1,5 @@
 import { capitalizeFirstLetter } from "../util/StringUtils";
+import PLACEHOLDER_IMAGE from "../assets/placeholder.png";
 
 const PAGES_DIR = "/src/pages";
 // vite import.meta.glob only works with compile-time literals.
@@ -17,7 +18,7 @@ export const ALL_PAGES = Object.entries(
   return {
     name: module.DISPLAY_NAME,
     date: module.CREATION_DATE,
-    image: module.DISPLAY_IMAGE,
+    image: module.DISPLAY_IMAGE ? module.DISPLAY_IMAGE : PLACEHOLDER_IMAGE,
     filepath: filepath,
     urlPath: getUrlPath(filepath),
     section: getSectionName(filepath),

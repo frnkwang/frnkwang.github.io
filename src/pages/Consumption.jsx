@@ -73,17 +73,22 @@ function ConsumptionObjectDisplay({ consumptionObject }) {
   return (
     <div>
       <hr />
-      <h3 style={{ display: "inline" }}>{name}</h3>
-      <p style={{ display: "inline" }}>{creatorDisplay}</p>
-      <br />
-      <i>
-        {format}
-        <br />
-        {dateDisplay}
-        {locationDisplay}
-      </i>
-      <br />
-      <p>{description}</p>
+      <details>
+        <summary>
+          <h3 style={{ display: "inline" }}>{name}</h3>
+          <p style={{ display: "inline" }}>{creatorDisplay}</p>
+        </summary>
+        <div>
+          <i>
+            {format}
+            <br />
+            {dateDisplay}
+            {locationDisplay}
+          </i>
+          <br />
+          <p>{description}</p>
+        </div>
+      </details>
     </div>
   );
 }

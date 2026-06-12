@@ -123,7 +123,7 @@ function ConsumptionPage() {
           Video games that don't have a defined story/completion; eg Mario Kart,
           Kirby Air Riders, Smash Bros, Bloons TD6
         </li>
-        <li>Video games that I replayed (lots of Ace Attorney...)</li>
+        <li>Video games that I replayed</li>
         <li>Concerts that I performed in</li>
         <li>Museums or parks that I can visit multiple times</li>
         <li>
@@ -131,6 +131,9 @@ function ConsumptionPage() {
         </li>
         <li>Things that I forgot about (oops)</li>
       </ul>
+      <p>
+        <b>Filter by category:</b>
+      </p>
       {categories.map((name) => {
         return (
           <CategorySelector

@@ -13,6 +13,46 @@ function formatDate(dateString) {
   return new Date(dateString).toDateString();
 }
 
+function getAllCategories(consumptionList) {
+  const categories = new Set(
+    consumptionList.map((c) => {
+      return c.category;
+    }),
+  );
+  return [...categories].toSorted((a, b) => {
+    if (b === "Other") return -1; // put Other last
+    return a < b;
+  });
+}
+
+function filterConsumptionList(consumptionList, categories) {
+  if (categories.size == 0) {
+    return consumptionList;
+  }
+  return consumptionList.filter((c) => {
+    return categories.has(c.category);
+  });
+}
+
+function CategorySelector({ name, selectedCategories, setSelectedCategories }) {
+  const handleToggle = (event) => {
+    if (event.target.checked) {
+      selectedCategories.add(name);
+    } else {
+      selectedCategories.delete(name);
+    }
+    setSelectedCategories(new Set(selectedCategories)); // force react refresh
+  };
+  return (
+    <div>
+      <label>
+        <input type="checkbox" onChange={handleToggle} />
+        {name}
+      </label>
+    </div>
+  );
+}
+
 function makeConsumptionObjectDisplay(c) {
   // c's members are the columns in CONSUMPTION_CSV
   if (!c.name) {
@@ -29,7 +69,7 @@ function makeConsumptionObjectDisplay(c) {
     c.creator !== undefined && c.creator != "" ? `, ${c.creator}` : "";
   // TODO: make this a collapsible element
   return (
-    <div key={c.name}>
+    <div key={`${c.name},${c.format}`}>
       <hr />
       <h3 style={{ display: "inline" }}>{c.name}</h3>
       <p style={{ display: "inline" }}>{creatorDisplay}</p>
@@ -48,6 +88,8 @@ function makeConsumptionObjectDisplay(c) {
 
 function ConsumptionPage() {
   const [data, setData] = useState([]);
+  const [categories, setCategories] = useState([]);
+  const [selectedCategories, setSelectedCategories] = useState(new Set());
 
   useEffect(() => {
     Papa.parse(CONSUMPTION_CSV, {
@@ -56,6 +98,8 @@ function ConsumptionPage() {
       complete: (results) => {
         // TODO: sort by date
         setData(results.data);
+        setCategories(getAllCategories(results.data));
+        setSelectedCategories(new Set());
       },
     });
   }, []);
@@ -85,16 +129,19 @@ function ConsumptionPage() {
         </li>
         <li>Things that I forgot about (oops)</li>
       </ul>
-      <p>
-        You might notice that I partake in more of these activities in the
-        winter. I suspect that's because it's so nice out in the
-        spring/summer/fall that I can't help but go out for runs, walks, and
-        bike rides. On top of that, I still play in several orchestras, and
-        rehearsals take up time. All that is to say, I'm not always reading or
-        consuming stuff, so you'll probably notice a few gaps here and there.
-        Anyway, here's the list:
-      </p>
-      {data.map(makeConsumptionObjectDisplay)}
+      {categories.map((name) => {
+        return (
+          <CategorySelector
+            key={name}
+            name={name}
+            selectedCategories={selectedCategories}
+            setSelectedCategories={setSelectedCategories}
+          />
+        );
+      })}
+      {filterConsumptionList(data, selectedCategories).map(
+        makeConsumptionObjectDisplay,
+      )}
     </div>
   );
 }

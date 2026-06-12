@@ -53,35 +53,37 @@ function CategorySelector({ name, selectedCategories, setSelectedCategories }) {
   );
 }
 
-function makeConsumptionObjectDisplay(c) {
-  // c's members are the columns in CONSUMPTION_CSV
-  if (!c.name) {
+function ConsumptionObjectDisplay({ consumptionObject }) {
+  if (!consumptionObject.name) {
     throw new Error(`Consumption object is missing name: ${c}.`);
   }
 
+  const { name, creator, _, format, date, endDate, location, description } =
+    consumptionObject;
+
   const dateDisplay =
-    c.endDate !== undefined && c.endDate !== ""
-      ? `${formatDate(c.date)} to ${formatDate(c.endDate)}`
-      : formatDate(c.date);
+    endDate !== undefined && endDate !== ""
+      ? `${formatDate(date)} to ${formatDate(endDate)}`
+      : formatDate(date);
   const locationDisplay =
-    c.location !== undefined && c.location !== "" ? ` at ${c.location}` : "";
+    location !== undefined && location !== "" ? ` at ${location}` : "";
   const creatorDisplay =
-    c.creator !== undefined && c.creator != "" ? `, ${c.creator}` : "";
+    creator !== undefined && creator != "" ? `, ${creator}` : "";
   // TODO: make this a collapsible element
   return (
-    <div key={`${c.name},${c.format}`}>
+    <div>
       <hr />
-      <h3 style={{ display: "inline" }}>{c.name}</h3>
+      <h3 style={{ display: "inline" }}>{name}</h3>
       <p style={{ display: "inline" }}>{creatorDisplay}</p>
       <br />
       <i>
-        {c.format}
+        {format}
         <br />
         {dateDisplay}
         {locationDisplay}
       </i>
       <br />
-      <p>{c.description}</p>
+      <p>{description}</p>
     </div>
   );
 }
@@ -140,7 +142,14 @@ function ConsumptionPage() {
         );
       })}
       {filterConsumptionList(data, selectedCategories).map(
-        makeConsumptionObjectDisplay,
+        (consumptionObject) => {
+          return (
+            <ConsumptionObjectDisplay
+              key={`${consumptionObject.name},${consumptionObject.format}`}
+              consumptionObject={consumptionObject}
+            />
+          );
+        },
       )}
     </div>
   );

@@ -89,9 +89,9 @@ function Header() {
         aria-expanded={isNavDrawerOpen}
         id="menuToggle"
       >
-        <button>
+        <button style={{ backgroundColor: "#dddddd" }}>
           <svg width="30" height="30" viewBox="0 0 30 30">
-            <path stroke="white" strokeWidth="2" d="M4 7h22M4 15h22M4 23h22" />
+            <path stroke="gray" strokeWidth="3" d="M4 7h22M4 15h22M4 23h22" />
           </svg>
         </button>
       </div>

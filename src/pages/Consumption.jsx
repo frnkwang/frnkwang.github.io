@@ -69,7 +69,6 @@ function ConsumptionObjectDisplay({ consumptionObject }) {
     location !== undefined && location !== "" ? ` at ${location}` : "";
   const creatorDisplay =
     creator !== undefined && creator != "" ? `, ${creator}` : "";
-  // TODO: make this a collapsible element
   return (
     <div>
       <hr />

@@ -103,9 +103,12 @@ function ConsumptionPage() {
       download: true, // read from /public
       header: true,
       complete: (results) => {
-        // TODO: sort by date
-        setData(results.data);
-        setCategories(getAllCategories(results.data));
+        const res = results.data.toSorted((a, b) => {
+          return a.date < b.date; // sort by date
+        });
+        console.log(res);
+        setData(res);
+        setCategories(getAllCategories(res));
         setSelectedCategories(new Set());
       },
     });

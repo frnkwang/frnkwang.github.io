@@ -105,7 +105,6 @@ function ConsumptionPage() {
         const res = results.data.toSorted((a, b) => {
           return a.date < b.date; // sort by date
         });
-        console.log(res);
         setData(res);
         setCategories(getAllCategories(res));
         setSelectedCategories(new Set());

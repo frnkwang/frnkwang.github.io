@@ -1,0 +1,54 @@
+/* Container that locks the player permanently to the viewport bottom */
+.floatingPlayerContainer {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  padding: 16px 24px;
+  background: #f4f4f4; ;
+  border-top: 1px solid #282828;
+  box-shadow: 0 -4px 10px rgba(0, 0, 0, 0.3);
+}
+
+/* Controller play/pause trigger button */
+.playerControlBtn {
+  background: #1d27b9;
+  border: none;
+  color: #ffffff;
+  padding: 10px 20px;
+  border-radius: 20px;
+  cursor: pointer;
+  font-weight: bold;
+  min-width: 90px;
+  transition: background-color 0.2s ease;
+}
+
+/* Timeline flex wrapper */
+.playerSliderContainer {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-grow: 1;
+  max-width: 600px;
+}
+
+/* Interactive native input range scrubber */
+.playerSlider {
+  flex-grow: 1;
+  cursor: pointer;
+  accent-color: #1d27b9;
+}
+
+/* Timers and digital layout text labels */
+.playerTimeLabel {
+  font-size: 13px;
+  font-family: monospace;
+  color: #b3b3b3;
+  min-width: 35px;
+  user-select: none;
+}

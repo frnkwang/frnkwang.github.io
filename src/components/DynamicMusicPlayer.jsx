@@ -109,7 +109,7 @@ export function DynamicMusicPlayer({ src, seekToTime }) {
   );
 }
 
-export function DynamicMusicBenchmark({
+export function DynamicMusicSection({
   sectionTitle,
   targetTime,
   currentTargetTime,
@@ -122,7 +122,7 @@ export function DynamicMusicBenchmark({
   useEffect(() => {
     const observerOptions = {
       root: null,
-      rootMargin: "-20% 0px -60% 0px",
+      rootMargin: "-50% 0px -50% 0px",
       threshold: 0,
     };
 
@@ -147,7 +147,7 @@ export function DynamicMusicBenchmark({
         observer.unobserve(sectionRef.current);
       }
     };
-  }, [targetTime, onTriggerSeek]); // TODO: do i need these?
+  }, [targetTime, onTriggerSeek]);
 
   return (
     <div

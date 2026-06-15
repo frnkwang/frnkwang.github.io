@@ -1,3 +1,5 @@
+/* Music player itself */
+
 /* Container that locks the player permanently to the viewport bottom */
 .floatingPlayerContainer {
   position: fixed;
@@ -53,6 +55,8 @@
   user-select: none;
 }
 
+/* Card components for each section/benchmark */
+
 /* The base card layout transition */
 .contentSectionCard {
   padding: 10px;
@@ -71,4 +75,16 @@
   border-left-color: #1d27b9;
   box-shadow: 0 0 15px rgba(14, 76, 247, 0.39);
   transform: scale(1.01); /* Subtle pop effect */
+}
+
+/* Indicate where the observer line is */
+.observerIndicatorLine {
+  position: fixed;
+  top: 50%; /* Associated with the -50% in DynamicMusicSection */
+  left: 0;
+  right: 0;
+  height: 2px;
+  background-color: #ff3b30;
+  z-index: -1;
+  pointer-events: none;   /* Ensures users can still click on elements underneath it */
 }

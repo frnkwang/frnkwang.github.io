@@ -2,8 +2,10 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 import {
   DynamicMusicPlayer,
-  DynamicMusicBenchmark,
+  DynamicMusicSection,
 } from "../../components/DynamicMusicPlayer";
+
+import styles from "../../components/DynamicMusicPlayer.module.css";
 
 export const DISPLAY_NAME = "FL3-35: Broken Seal";
 export const CREATION_DATE = new Date("2020-05-07");
@@ -14,6 +16,7 @@ function FL3_35() {
 
   return (
     <div>
+      <div className={styles.observerIndicatorLine} />
       <DynamicMusicPlayer src="/music/FL3-35.mp3" seekToTime={seekToTime} />
       <h2>FL3-35: Broken Seal</h2>
       <p>Finished May 7th, 2020</p>
@@ -49,7 +52,7 @@ function FL3_35() {
         <br /> <br />
         TODO TODO
       </p>
-      <DynamicMusicBenchmark
+      <DynamicMusicSection
         sectionTitle="Opening Murmurs"
         targetTime={"00:00"}
         currentTargetTime={seekToTime}
@@ -79,8 +82,8 @@ function FL3_35() {
         eventually rises into the next part, which I like to think of as the
         main theme. Also, this is the first time I modulated to the dominant so
         I could resolve back to the tonic, and I think it was very convincing.
-      </DynamicMusicBenchmark>
-      <DynamicMusicBenchmark
+      </DynamicMusicSection>
+      <DynamicMusicSection
         sectionTitle="Main Chorus"
         targetTime={"00:54.4"}
         currentTargetTime={seekToTime}
@@ -106,8 +109,8 @@ function FL3_35() {
         same thing in FL3-33’s main theme. Also note that the drums here follow
         a standard 4-beat pattern, but with an extra beat. This kinda reinforces
         the 4+1 I’ve established here.
-      </DynamicMusicBenchmark>
-      <DynamicMusicBenchmark
+      </DynamicMusicSection>
+      <DynamicMusicSection
         sectionTitle="Transition and Modulation"
         targetTime={"01:12.7"}
         currentTargetTime={seekToTime}
@@ -152,8 +155,8 @@ function FL3_35() {
         basically still a 4+1 rhythm. Otherwise, this 8-bar section is also a
         first for me in that it’s the first “subtle” key change I’ve written,
         changing towards B minor in the last two bars.
-      </DynamicMusicBenchmark>
-      <DynamicMusicBenchmark
+      </DynamicMusicSection>
+      <DynamicMusicSection
         sectionTitle="Murmurs again"
         targetTime={"01:49.08"}
         currentTargetTime={seekToTime}
@@ -173,8 +176,8 @@ function FL3_35() {
         There are downbeat emphases, but they’re more of a chordal underpinning;
         the melody is on the offbeats. Honestly though, this is really a
         transition. The melody isn’t very interesting.
-      </DynamicMusicBenchmark>
-      <DynamicMusicBenchmark
+      </DynamicMusicSection>
+      <DynamicMusicSection
         sectionTitle="Haunting Chorale"
         targetTime={"02:34.47"}
         currentTargetTime={seekToTime}
@@ -205,8 +208,8 @@ function FL3_35() {
         <br />I say it’s interesting because it spans over two bars, which in a
         way, makes it harder to tell that it’s in 5. This is subtlely used later
         too.
-      </DynamicMusicBenchmark>
-      <DynamicMusicBenchmark
+      </DynamicMusicSection>
+      <DynamicMusicSection
         sectionTitle="Crashing Back"
         targetTime={"03:01.8"}
         currentTargetTime={seekToTime}
@@ -239,8 +242,8 @@ function FL3_35() {
         the offbeat of beat 4 of the last bar of the phrase. It feels pretty
         odd, but we are immediately reoriented by a big bass drum hit on the
         downbeat of the next phrase.
-      </DynamicMusicBenchmark>
-      <DynamicMusicBenchmark
+      </DynamicMusicSection>
+      <DynamicMusicSection
         sectionTitle="Rhythmic Ominousness"
         targetTime={"03:38.17"}
         currentTargetTime={seekToTime}
@@ -302,8 +305,8 @@ function FL3_35() {
         which also points towards the main theme. Overall, I think this entire
         8-bar phrase is an incredible “building up” transition. It’s very tense
         and leads back into the main theme very well.
-      </DynamicMusicBenchmark>
-      <DynamicMusicBenchmark
+      </DynamicMusicSection>
+      <DynamicMusicSection
         sectionTitle="Chorus, Transition, and Coda"
         targetTime={"04:23.6"}
         currentTargetTime={seekToTime}
@@ -339,7 +342,7 @@ function FL3_35() {
         not have happened without this one. The harmonies, willingness to change
         keys, and brilliant building transition from this piece all led into
         FL3-33.
-      </DynamicMusicBenchmark>
+      </DynamicMusicSection>
       Alright. Here’s the structure. Not each box is the same length.
       <br />
       <br />

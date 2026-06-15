@@ -13,11 +13,20 @@ export const CREATION_DATE = new Date("2020-05-07");
 function FL3_35() {
   // in "MM:SS.ffffff" format
   const [seekToTime, setSeekToTime] = useState(null);
+  const [doSeek, setDoSeek] = useState(false);
+
+  const maybeSeek = (targetTime) => {
+    if (doSeek) setSeekToTime(targetTime);
+  };
 
   return (
     <div>
       <div className={styles.observerIndicatorLine} />
-      <DynamicMusicPlayer src="/music/FL3-35.mp3" seekToTime={seekToTime} />
+      <DynamicMusicPlayer
+        src="/music/FL3-35.mp3"
+        setDoSeek={setDoSeek}
+        seekToTime={seekToTime}
+      />
       <h2>FL3-35: Broken Seal</h2>
       <p>Finished May 7th, 2020</p>
       <i>
@@ -56,7 +65,7 @@ function FL3_35() {
         sectionTitle="Opening Murmurs"
         targetTime={"00:00"}
         currentTargetTime={seekToTime}
-        onTriggerSeek={setSeekToTime}
+        onTriggerSeek={maybeSeek}
       >
         The piece starts, quietly, ominously, with rhythm 1. It’s one E,
         repeated:
@@ -87,7 +96,7 @@ function FL3_35() {
         sectionTitle="Main Chorus"
         targetTime={"00:54.4"}
         currentTargetTime={seekToTime}
-        onTriggerSeek={setSeekToTime}
+        onTriggerSeek={maybeSeek}
       >
         The next bit, the main theme, is a bit interesting. First, because it
         doesn’t really fall perfectly into any of the rhythms I mentioned
@@ -114,7 +123,7 @@ function FL3_35() {
         sectionTitle="Transition and Modulation"
         targetTime={"01:12.7"}
         currentTargetTime={seekToTime}
-        onTriggerSeek={setSeekToTime}
+        onTriggerSeek={maybeSeek}
       >
         After this, we are introduced to a new idea, which is primarily using
         the second rhythm:
@@ -160,7 +169,7 @@ function FL3_35() {
         sectionTitle="Murmurs again"
         targetTime={"01:49.08"}
         currentTargetTime={seekToTime}
-        onTriggerSeek={setSeekToTime}
+        onTriggerSeek={maybeSeek}
       >
         The next bit is a restatement of the first theme, with different
         instruments, some trills, and in B. It’s not that noteworthy, and I
@@ -181,7 +190,7 @@ function FL3_35() {
         sectionTitle="Haunting Chorale"
         targetTime={"02:34.47"}
         currentTargetTime={seekToTime}
-        onTriggerSeek={setSeekToTime}
+        onTriggerSeek={maybeSeek}
       >
         The next section, shockingly, is a choral section over the same
         bassline. This is the first time the 2+3 rhythm is played, with a nearly
@@ -213,7 +222,7 @@ function FL3_35() {
         sectionTitle="Crashing Back"
         targetTime={"03:01.8"}
         currentTargetTime={seekToTime}
-        onTriggerSeek={setSeekToTime}
+        onTriggerSeek={maybeSeek}
       >
         After building out of the choral section, we are again introduced to
         rhythm 1. This time, it builds off a E diminished 7th chord over 8 bars,
@@ -247,7 +256,7 @@ function FL3_35() {
         sectionTitle="Rhythmic Ominousness"
         targetTime={"03:38.17"}
         currentTargetTime={seekToTime}
-        onTriggerSeek={setSeekToTime}
+        onTriggerSeek={maybeSeek}
       >
         The next few bars are transition, but it reintroduces two things that
         were mostly glossed over before:
@@ -310,7 +319,7 @@ function FL3_35() {
         sectionTitle="Chorus, Transition, and Coda"
         targetTime={"04:23.6"}
         currentTargetTime={seekToTime}
-        onTriggerSeek={setSeekToTime}
+        onTriggerSeek={maybeSeek}
       >
         The rest of the piece isn’t really that interesting anymore. The main
         theme plays, then the corresponding 16th note rhythm 2 line plays. Then,

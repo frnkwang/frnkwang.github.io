@@ -35,7 +35,7 @@ function normalizeTimestampRemoveMicros(timeString) {
   return normalizeTimestamp(timeString).substring(0, 5);
 }
 
-export function DynamicMusicPlayer({ src, seekToTime }) {
+export function DynamicMusicPlayer({ src, setDoSeek, seekToTime }) {
   const audioRef = useRef(null);
   const [isPlaying, setIsPlaying] = useState(false);
   const [currentTime, setCurrentTime] = useState(0);
@@ -49,6 +49,10 @@ export function DynamicMusicPlayer({ src, seekToTime }) {
       setCurrentTime(seekTimeSec);
     }
   }, [seekToTime]);
+
+  const handleDoSeekChange = (event) => {
+    setDoSeek(event.target.checked);
+  };
 
   const togglePlayPause = () => {
     if (isPlaying) {
@@ -86,11 +90,13 @@ export function DynamicMusicPlayer({ src, seekToTime }) {
         onLoadedMetadata={onLoadedMetadata}
         onTimeUpdate={onTimeUpdate}
       />
-
+      <label style={{ display: "flex", gap: "8px", alignItems: "center" }}>
+        <input type="checkbox" onChange={handleDoSeekChange} />
+        <span>Seek audio while reading</span>
+      </label>
       <button onClick={togglePlayPause} className={styles.playerControlBtn}>
         {isPlaying ? "⏸ Pause" : "▶ Play"}
       </button>
-
       <div className={styles.playerSliderContainer}>
         <span className={styles.playerTimeLabel}>
           {formatTime(currentTime)}

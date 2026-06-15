@@ -30,7 +30,9 @@ function FL3_35() {
         seekToTime={seekToTime}
       />
       <h2>FL3-35: Broken Seal</h2>
-      <p>Finished May 7th, 2020</p>
+      <p>
+        Composed/produced by me in FL Studio Mobile 3; Finished May 7th, 2020
+      </p>
       <i>
         Most of these notes are taken directly from a{" "}
         <Link to="/journal">journal</Link> entry I wrote about half a year after

@@ -44,7 +44,6 @@ function JournalPage() {
       <RecentPagesDisplay
         props={{
           searchDir: "/src/pages/journal",
-          maxEntries: 5,
           includeSection: false,
         }}
       />

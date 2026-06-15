@@ -25,7 +25,6 @@ function CodePage() {
       <RecentPagesDisplay
         props={{
           searchDir: "/src/pages/code",
-          maxEntries: 5,
           includeSection: false,
         }}
       />

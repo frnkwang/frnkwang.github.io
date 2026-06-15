@@ -11,12 +11,21 @@
   transform: translateY(-5px);
   box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
 }
+.card a {
+  display: flex;
+  flex-direction: column;
+  text-decoration: none;
+  color: inherit;
+  height: 100%;
+}
 .cardImage {
   width: 100%;
-  max-height: 250px;
+  height: 250px;
   object-fit: cover;
   display: block;
+  flex-shrink: 0;
 }
 .cardContent {
   padding: 20px;
+  flex-grow: 1;
 }

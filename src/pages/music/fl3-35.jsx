@@ -4,10 +4,12 @@ import {
   DynamicMusicPlayer,
   DynamicMusicSection,
 } from "../../components/DynamicMusicPlayer";
-
 import styles from "../../components/DynamicMusicPlayer.module.css";
 
+import img from "../../assets/fl3-35.png";
+
 export const DISPLAY_NAME = "FL3-35: Broken Seal";
+export const DISPLAY_IMAGE = img;
 export const CREATION_DATE = new Date("2020-05-07");
 
 function FL3_35() {

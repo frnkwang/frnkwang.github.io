@@ -7,6 +7,7 @@ import {
 import styles from "../../components/DynamicMusicPlayer.module.css";
 
 import img from "../../assets/fl3-35.png";
+import MusicNotation from "../../components/MusicNotation";
 
 export const DISPLAY_NAME = "FL3-35: Broken Seal";
 export const DISPLAY_IMAGE = img;
@@ -62,8 +63,46 @@ function FL3_35() {
         Mobile 3] (well, new at the time), so I wrote this. The interesting part
         is how I use rhythms in different sections to fill up the 5 beats while
         still only really being 4, in my opinion. The main rhythms are:
-        <br /> <br />
-        TODO TODO
+      </p>
+      <ol>
+        <li>
+          <MusicNotation
+            musicKey="Em"
+            meter="5/4"
+            noteDuration="1/8"
+            notes="B2 z B - B B - B z B2|"
+          />
+        </li>
+        <li>
+          <MusicNotation
+            musicKey="Em"
+            meter="5/4"
+            noteDuration="1/8"
+            notes="B2 z B - B z B2 B2|"
+          />
+        </li>
+        <li>
+          <MusicNotation
+            musicKey="Em"
+            meter="5/4"
+            noteDuration="1/4"
+            notes="B2 B3|"
+          />
+        </li>
+        <li>
+          <MusicNotation
+            musicKey="Em"
+            meter="5/4"
+            noteDuration="1/4"
+            notes="B3 B2|"
+          />
+        </li>
+      </ol>
+      <p>
+        These are all pretty loosely defined, especially 3&4. There’s also an
+        underlying rhythmic motif:
+        <MusicNotation musicKey="Em" noteDuration="1/16" notes="B3B B2B2" />
+        which appears a lot later, and I’ll talk about later.
       </p>
       <DynamicMusicSection
         sectionTitle="Opening Murmurs"
@@ -73,17 +112,19 @@ function FL3_35() {
       >
         The piece starts, quietly, ominously, with rhythm 1. It’s one E,
         repeated:
-        <br />
-        <br />
-        TODO TODO
-        <br />
-        <br /> After a bit, a new melody, with the same rhythm, plays on top of
-        it:
-        <br />
-        <br />
-        TODO TODO
-        <br />
-        <br />
+        <MusicNotation
+          musicKey="Em"
+          meter="5/4"
+          noteDuration="1/8"
+          notes="e2 z e - e e - e z E2|e2 z e - e e - e z ^d2|"
+        />
+        After a bit, a new melody, with the same rhythm, plays on top of it:
+        <MusicNotation
+          musicKey="Em"
+          meter="5/4"
+          noteDuration="1/8"
+          notes="e2 z =f - f d - d z e2|d2 z =f - f d - d z e2|"
+        />
         The lines playing on top of each other immediately creates some
         discomfort because of the dissonance between E & F♮. Also note that this
         rhythm is really just 4 beats, but with two eighth rests inserted. To
@@ -106,11 +147,12 @@ function FL3_35() {
         doesn’t really fall perfectly into any of the rhythms I mentioned
         before, and second, because it introduces the rhythmic motif I mentioned
         earlier:
-        <br />
-        <br />
-        TODO TODO
-        <br />
-        <br />
+        <MusicNotation
+          musicKey="Em"
+          meter="5/4"
+          noteDuration="1/16"
+          notes="e3e B2e2 - e2e2 - e2B2 E4|e3e B2e2 - e2B2 c2^c2 d2^d2"
+        />
         It definitely resembles rhythm 1 the most, but puts extra emphasis on
         the fifth beat specifically. In my opinion, it now sounds like 4 beats
         per bar, with one extra beat thrown on the end, making it kind
@@ -131,12 +173,14 @@ function FL3_35() {
       >
         After this, we are introduced to a new idea, which is primarily using
         the second rhythm:
-        <br />
-        <br />
-        TODO TODO
-        <br />
-        <br />I think of this as also a 4+1 rhythm, mostly because of the intro
-        to Persona 5’s “Last Surprise,” which is similar, but in 4, and doesn’t
+        <MusicNotation
+          musicKey="Em"
+          meter="5/4"
+          noteDuration="1/16"
+          notes="eBGE z2 eB GE z2 eBGE [^de]4|eBGE z2 eB GE z2 EG_B^c [=de]4"
+        />
+        I think of this as also a 4+1 rhythm, mostly because of the intro to
+        Persona 5’s “Last Surprise,” which is similar, but in 4, and doesn’t
         include the last beat. If you think of this as 4+1, then the main theme
         did a good job of transitioning between rhythm 1 and rhythm 2 by placing
         emphasis on the last beat.

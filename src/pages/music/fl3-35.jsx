@@ -138,7 +138,7 @@ function FL3_35() {
         I could resolve back to the tonic, and I think it was very convincing.
       </DynamicMusicSection>
       <DynamicMusicSection
-        sectionTitle="Main Chorus"
+        sectionTitle="Main Theme"
         targetTime={"00:54.4"}
         currentTargetTime={seekToTime}
         onTriggerSeek={maybeSeek}
@@ -151,7 +151,7 @@ function FL3_35() {
           musicKey="Em"
           meter="5/4"
           noteDuration="1/16"
-          notes="e3e B2e2 - e2e2 - e2B2 E4|e3e B2e2 - e2B2 c2^c2 d2^d2"
+          notes="e3e B2e2 - e2e2-e2B2 E4|e3e B2e2 - e2B2c2^c2 d2^d2"
         />
         It definitely resembles rhythm 1 the most, but puts extra emphasis on
         the fifth beat specifically. In my opinion, it now sounds like 4 beats
@@ -196,18 +196,20 @@ function FL3_35() {
         <br />
         The next section is a piano line, marked by this odd rhythm. I say it’s
         odd because it only ever appears in this line:
-        <br />
-        <br />
-        TODO TODO
-        <br />
-        <br />
+        <MusicNotation
+          musicKey="Em"
+          meter="5/4"
+          noteDuration="1/8"
+          notes="[B,EG]3 [DG_B]-[DG_B]6|[B,EG]3 [_EFA]-[EFA]6|[B,EG]3 [DG_B]-[DG_B]6|[DG_B]3 [DFA]-[DFA]6|"
+        />
         You could argue that this isn’t 4+1 anymore, but I’d argue that the bass
         line shows that it is:
-        <br />
-        <br />
-        TODO TODO
-        <br />
-        <br />
+        <MusicNotation
+          musicKey="Em"
+          meter="5/4"
+          noteDuration="1/8"
+          notes="EEEL[eE] EEEL[eE] EL[eE]|_EEEL[_eE] EEEL[eE] EL[eE]|"
+        />
         Since this bass line is accented, it makes a clear 2+2+1 rhythm,
         basically still a 4+1 rhythm. Otherwise, this 8-bar section is also a
         first for me in that it’s the first “subtle” key change I’ve written,
@@ -246,11 +248,12 @@ function FL3_35() {
         rhythm, but it’s quite quiet, so I think of it as 2+3 still. I really,
         really like this section for the atmosphere it creates. I got inspired
         from a similar section in FL3-27. Like I said, it’s almost haunting:
-        <br />
-        <br />
-        TODO TODO
-        <br />
-        <br />
+        <MusicNotation
+          musicKey="Em"
+          meter="5/4"
+          noteDuration="1/4"
+          notes="[FBd]2[Bdf]3|[bge]2[_bf_e]3|[Beg]2[Acf]3|[cfa]2[^ce_a]3|"
+        />
         Especially the last chord I wrote there. I can’t really say why it’s
         haunting – maybe it’s all the chromatic steps? Not sure. But I really
         like it.
@@ -258,13 +261,14 @@ function FL3_35() {
         <br />
         After this choral line descends downwards, there’s an interesting rhythm
         introduced:
-        <br />
-        <br />
-        TODO TODO
-        <br />
-        <br />I say it’s interesting because it spans over two bars, which in a
-        way, makes it harder to tell that it’s in 5. This is subtlely used later
-        too.
+        <MusicNotation
+          musicKey="Em"
+          meter="5/4"
+          noteDuration="1/4"
+          notes="B2B2B-|BB2B2|"
+        />
+        I say it’s interesting because it spans over two bars, which in a way,
+        makes it harder to tell that it’s in 5. This is subtlely used later too.
       </DynamicMusicSection>
       <DynamicMusicSection
         sectionTitle="Crashing Back"
@@ -276,23 +280,26 @@ function FL3_35() {
         rhythm 1. This time, it builds off a E diminished 7th chord over 8 bars,
         gradually making the rhythm more complex, but still remaining distinctly
         rhythm 1, until it breaks in the last bar, spilling downwards:
-        <br />
-        <br />
-        TODO TODO
-        <br />
-        <br />
-        This is about the only time I’ve used this <b>TODO TODO</b> rhythm, and
-        it worked very well, but I don’t really think I’ve found another
+        <MusicNotation
+          musicKey="Em"
+          meter="5/4"
+          noteDuration="1/16"
+          notes="z2^cc d3 c3 _B3 G3 GF=FE|"
+        />
+        This is about the only time I’ve used this
+        <MusicNotation noteDuration="1/16" notes="B3 B3 B3 B3" /> rhythm, and it
+        worked very well, but I don’t really think I’ve found another
         appropriate place to use it again.
         <br />
         <br />
         It crashes down into another section using rhythm 2, or at least the
         16th note rhythm that resembles it:
-        <br />
-        <br />
-        TODO TODO
-        <br />
-        <br />
+        <MusicNotation
+          musicKey="Em"
+          meter="5/4"
+          noteDuration="1/16"
+          notes="EGFB z2 EG FB z2 EBAF [_BB]4|=BGFE z2 BG FE z2 BGFE [E_D]4|"
+        />
         Since previously, rhythms 1&2 were separated by the main theme acting as
         transition between the two, having the two of them right next to each
         other is a bit surprising. This phrase builds and strangely resolves on
@@ -308,60 +315,65 @@ function FL3_35() {
       >
         The next few bars are transition, but it reintroduces two things that
         were mostly glossed over before:
-        <br />
-        <br />
-        TODO TODO
-        <br />
-        <br />
+        <MusicNotation noteDuration="1/16" notes="B3B B2B2" /> and{" "}
+        <MusicNotation meter="5/4" noteDuration="1/4" notes="B2B2B-|BB2B2" />
         It combines these into something like this:
-        <br />
-        <br />
-        TODO TODO
-        <br />
-        <br />
+        <MusicNotation
+          musicKey="Em"
+          meter="5/4"
+          noteDuration="1/16"
+          notes="B3B B2B2 z4 z4 B3B|B2B2 z4 z4 B3B B2B2"
+        />
         This feels really odd to me because when you repeat, there is no rest
-        between the two <b>TODO TODO</b>. Though the next phrase isn’t the main
-        theme, because the <b>TODO TODO</b>only appears in the main theme, we
-        know that it’s going to come soon. The ominous energy also returns here,
+        between the two dotted motifs. Though the next phrase isn’t the main
+        theme, because the dotted motif only appears in the main theme, we know
+        that it’s going to come soon. The ominous energy also returns here,
         kinda like the beginning, which also points to the main theme.
         <br />
         <br />
         The next phrase is a completely new idea, combining rhythm 4 and 1
         together:
-        <br />
-        <br />
-        TODO TODO
+        <MusicNotation
+          musicKey="Em"
+          meter="5/4"
+          noteDuration="1/8"
+          notes="E3 E-E2zE FG|G2 z G- G F- F z G2|G3 G-G2 z G AG"
+        />
+        This section is probably a bit questionable, since the melody is broken
+        between two instruments, and it’s a bit disconnected, but it’s okay.
+        There isn’t really anything to say about it, though.
         <br />
         <br />
         The next 8 bars are definitely building and transition. It stacks the
         two instruments on top of each other, with new harmony rhythms, creating
         a lot of odd conflicting rhythms and creating more tension:
-        <br />
-        <br />
-        TODO TODO
-        <br />
-        <br />
+        <MusicNotation
+          musicKey="Em"
+          meter="5/4"
+          noteDuration="1/8"
+          notes="[V:1]E3E-E2(3E2F2G2|G3G-G2(3G2A2G2|[V:2]E2zE- E F- F z F2|G2 z G- G F- F z G2|[V:3]FE zF Ezz2GF|GF zG Fzz2AG"
+        />
         Definitely one of the more complex things I’ve written. Two fun things
         to note:
         <ol>
           <li>
-            Definitely one of the more complex things I’ve written. Two fun
-            things to note:
+            The top line has an overall rhythm of 3+2, but in the 3, 2 notes are
+            played, and in the 2, 3 notes are played
           </li>
           <li>
-            The harmless energy key line is taken from Barber’s “Medea’s Dance
-            of Vengeance,” which I was playing in orchestra at the time. It
-            matches the shogun line, then switches to the lead slim line every
-            bar. Err – that’s weird. But point is, it kinda fits well here.
+            The bottom line is taken from Barber’s “Medea’s Dance of Vengeance,”
+            which I was playing in orchestra at the time. It matches the top
+            line, then switches to the middle line every bar. Err – that’s
+            weird. But point is, it kinda fits well here.
           </li>
         </ol>
         The second half of this 8-bar phrase is a chromatic build up to E using
         2+2+1 rhythm. The shogun synth plays triplets, the lead slim synth plays
-        the <b>TODO TODO</b> rhythm over and over (which really drives into the
-        main theme), and the 16th note harmonies from the main theme fade in,
-        which also points towards the main theme. Overall, I think this entire
-        8-bar phrase is an incredible “building up” transition. It’s very tense
-        and leads back into the main theme very well.
+        the dotted motif rhythm over and over (which really drives into the main
+        theme), and the 16th note harmonies from the main theme fade in, which
+        also points towards the main theme. Overall, I think this entire 8-bar
+        phrase is an incredible “building up” transition. It’s very tense and
+        leads back into the main theme very well.
       </DynamicMusicSection>
       <DynamicMusicSection
         sectionTitle="Chorus, Transition, and Coda"
@@ -379,11 +391,10 @@ function FL3_35() {
         shifting up a 5th.
         <br />
         <br />
-        We then return to the first theme, with the <b>TODO TODO</b>in the
-        bassline – kind of like the evil has escaped and is hiding everywhere
-        now. The theme plays, but ends on a strange F♮ while it’s in F#, leaving
-        the listener hanging. The evil is hiding somewhere, but we don’t know
-        where.
+        We then return to the first theme, with the dotted motif in the bassline
+        – kind of like the evil has escaped and is hiding everywhere now. The
+        theme plays, but ends on a strange F♮ while it’s in F#, leaving the
+        listener hanging. The evil is hiding somewhere, but we don’t know where.
         <br />
         <br />
         Anyway, I love the ending for two reasons: it doesn’t resolve, and it
@@ -400,12 +411,32 @@ function FL3_35() {
         keys, and brilliant building transition from this piece all led into
         FL3-33.
       </DynamicMusicSection>
-      Alright. Here’s the structure. Not each box is the same length.
-      <br />
-      <br />
-      TODO TODO
-      <br />
-      <br />
+      Alright. Here’s the structure. Not each bullet point is the same length.
+      <ul>
+        <li>Intro (theme 1)</li>
+        <li>blatant dissonance intro</li>
+        <li>intro in B</li>
+        <li>Main theme</li>
+        <li>16th notes</li>
+        <li>piano</li>
+        <li>theme 1 in B</li>
+        <li>theme 1 in F#</li>
+        <li>bass transition</li>
+        <li>choral</li>
+        <li>choral transition</li>
+        <li>theme 1 dim7</li>
+        <li>16th notes var</li>
+        <li>
+          bass transition <MusicNotation noteDuration="1/16" notes="B3B B2B2" />
+        </li>
+        <li>rhythm 4, rhythm 1</li>
+        <li>build transition</li>
+        <li>Main theme</li>
+        <li>16th notes</li>
+        <li>Main theme + choral</li>
+        <li>piano in F#</li>
+        <li>theme 1 in F#</li>
+      </ul>
     </div>
   );
 }

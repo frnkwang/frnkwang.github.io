@@ -11,7 +11,7 @@ import MusicNotation from "../../components/MusicNotation";
 
 export const DISPLAY_NAME = "FL3-35: Broken Seal";
 export const DISPLAY_IMAGE = img;
-export const CREATION_DATE = new Date("2020-05-07");
+export const CREATION_DATE = new Date("2020/05/07");
 
 function FL3_35() {
   // in "MM:SS.ffffff" format

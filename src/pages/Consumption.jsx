@@ -2,7 +2,7 @@ import Papa from "papaparse";
 import { useEffect, useState } from "react";
 
 export const DISPLAY_NAME = "Consumption";
-export const CREATION_DATE = new Date("2026-04-12");
+export const CREATION_DATE = new Date("2026/04/12");
 
 const CONSUMPTION_CSV = "/consumption.csv"; // in /public
 

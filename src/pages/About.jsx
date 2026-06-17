@@ -1,7 +1,7 @@
 import frankImg from "../assets/frank.jpg";
 
 export const DISPLAY_NAME = "About";
-export const CREATION_DATE = new Date("2026-04-12");
+export const CREATION_DATE = new Date("2026/04/12");
 
 function makeStyledLink(href, text) {
   return (

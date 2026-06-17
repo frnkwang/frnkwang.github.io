@@ -1,7 +1,7 @@
 import RecentPagesDisplay from "../components/RecentPagesDisplay.jsx";
 
 export const DISPLAY_NAME = "Home";
-export const CREATION_DATE = new Date("2026-04-12");
+export const CREATION_DATE = new Date("2026/04/12");
 
 export function HomePage() {
   return (

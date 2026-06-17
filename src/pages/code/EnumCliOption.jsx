@@ -3,7 +3,7 @@ import img from "../../assets/enum_cli_option.png";
 
 export const DISPLAY_NAME = "enum-cli-option: a simple C++ boost add-on";
 export const DISPLAY_IMAGE = img;
-export const CREATION_DATE = new Date("2026-04-10");
+export const CREATION_DATE = new Date("2026/04/10");
 
 function EnumCliOption() {
   return (

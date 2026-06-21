@@ -63,13 +63,3 @@ img {
 .fs-6 {
     font-size: 0.67em
 }
-
-.dynamic-grid {
-  display: grid;
-  /* Automatically creates columns based on available space */
-  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-  gap: 24px;             /* Spacing between cards vertically and horizontally */
-  padding: 20px;         /* Outer padding for the entire grid layout */
-  width: 100%;           /* Spans the full width of the parent container */
-  box-sizing: border-box;
-}

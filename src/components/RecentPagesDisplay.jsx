@@ -26,7 +26,7 @@ export function RecentPagesDisplay({ props }) {
   const useImage = props.useImage;
 
   return (
-    <div className="dynamic-grid">
+    <div className={styles.dynamicGrid}>
       {findRecentPages(searchDir, maxEntries).map((page) =>
         makePageDisplay(page, includeSection, useImage),
       )}

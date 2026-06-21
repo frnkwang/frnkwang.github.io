@@ -1,4 +1,12 @@
-/* other components */
+.dynamicGrid {
+  display: grid;
+  /* Automatically creates columns based on available space */
+  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+  gap: 24px;             /* Spacing between cards vertically and horizontally */
+  width: 100%;           /* Spans the full width of the parent container */
+  box-sizing: border-box;
+}
+
 /* Card */
 .card {
   background-color: #f0f0f0;

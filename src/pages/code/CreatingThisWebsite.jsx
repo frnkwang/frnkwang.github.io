@@ -1,6 +1,13 @@
 import CodeBlock from "../../components/CodeBlock";
 import img from "../../assets/this_website.png";
 
+import bad_mobile_header from "../../assets/code/CreatingThisWebsite/bad_mobile_header.png";
+import base_site from "../../assets/code/CreatingThisWebsite/base_site.png";
+import bootstrap_navbar from "../../assets/code/CreatingThisWebsite/bootstrap_navbar.gif";
+import current_navbar from "../../assets/code/CreatingThisWebsite/current_navbar.png";
+import directory_structure from "../../assets/code/CreatingThisWebsite/directory_structure.png";
+import front_end_frameworks_ratios from "../../assets/code/CreatingThisWebsite/front_end_frameworks_ratios.png";
+
 export const DISPLAY_NAME = "Creating This Website";
 export const DISPLAY_IMAGE = img;
 export const CREATION_DATE = new Date("2026/06/27");
@@ -57,12 +64,12 @@ function CreatingThisWebsite() {
           State of JS
         </a>
         :
-        <img src="/src/assets/code/CreatingThisWebsite/front_end_frameworks_ratios.png" />
-        I was a bit on the fence between React and Angular - I vaguely recalled
-        enjoying Angular's two-way bindings when I used it previously, though I
-        couldn't tell you what that means anymore - but after not much debate, I
-        figured it didn't really matter and just arbitrarily chose React. I also
-        decided right from the start to just use{" "}
+        <img src={front_end_frameworks_ratios} />I was a bit on the fence
+        between React and Angular - I vaguely recalled enjoying Angular's
+        two-way bindings when I used it previously, though I couldn't tell you
+        what that means anymore - but after not much debate, I figured it didn't
+        really matter and just arbitrarily chose React. I also decided right
+        from the start to just use{" "}
         <a href="https://docs.github.com/en/pages">GitHub Pages</a> for hosting.
         I had no plans for this website to be anything bigger than a cool side
         project to show friends, so I didn't need anything bigger.
@@ -84,7 +91,7 @@ function CreatingThisWebsite() {
         basic page up and running using the basic HTML I did still remember:
         <div className="hori container" style={{ justifyContent: "center" }}>
           <img
-            src="/src/assets/code/CreatingThisWebsite/base_site.png"
+            src={base_site}
             style={{ border: "3px solid gray", maxWidth: "70%" }}
           />
         </div>
@@ -109,7 +116,7 @@ function CreatingThisWebsite() {
         it created a scroll bar:
         <div className="hori container" style={{ justifyContent: "center" }}>
           <img
-            src="/src/assets/code/CreatingThisWebsite/bad_mobile_header.png"
+            src={bad_mobile_header}
             style={{ border: "3px solid gray", maxWidth: "70%" }}
           />
         </div>
@@ -127,7 +134,7 @@ function CreatingThisWebsite() {
         which is exactly what I was working on. I imagined something like this:
         <div className="hori container" style={{ justifyContent: "center" }}>
           <img
-            src="/src/assets/code/CreatingThisWebsite/bootstrap_navbar.gif"
+            src={bootstrap_navbar}
             style={{ border: "3px solid gray", maxWidth: "70%" }}
           />
         </div>
@@ -157,7 +164,7 @@ function CreatingThisWebsite() {
         today when on mobile.
         <div className="hori container" style={{ justifyContent: "center" }}>
           <img
-            src="/src/assets/code/CreatingThisWebsite/current_navbar.png"
+            src={current_navbar}
             style={{ border: "3px solid gray", maxWidth: "70%" }}
           />
         </div>
@@ -178,10 +185,7 @@ function CreatingThisWebsite() {
         top-level pages, and they're not required to have subpages (eg,
         Consumption or About).{" "}
         <div className="hori container" style={{ justifyContent: "center" }}>
-          <img
-            src="/src/assets/code/CreatingThisWebsite/directory_structure.png"
-            style={{ maxWidth: "70%" }}
-          />
+          <img src={directory_structure} style={{ maxWidth: "70%" }} />
         </div>
         I could've just as easily chosen to organize all my pages at the top
         level, and within each file, list the category they belonged to. Nothing

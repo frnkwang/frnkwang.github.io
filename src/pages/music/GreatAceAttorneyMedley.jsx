@@ -7,13 +7,21 @@ import vln2 from "../../assets/music/GreatAceAttorneyMedley/The Great Ace Attorn
 import vla from "../../assets/music/GreatAceAttorneyMedley/The Great Ace Attorney Medley-Viola.pdf";
 import cello from "../../assets/music/GreatAceAttorneyMedley/The Great Ace Attorney Medley-Violoncello.pdf";
 
+import {
+  DynamicMusicPlayer,
+  DynamicMusicProvider,
+} from "../../components/DynamicMusicPlayer";
+
 export const DISPLAY_NAME = "The Great Ace Attorney Medley";
 export const DISPLAY_IMAGE = img;
 export const CREATION_DATE = new Date("2026/05/26");
 
 function GreatAceAttorneyMedley() {
+  // I use DynamicMusicProvider here just to access DynamicMusicPlayer.
+  // I don't really want DynamicMusicSections since I don't have much analysis to say for each tune
   return (
-    <div>
+    <DynamicMusicProvider>
+      <DynamicMusicPlayer src="/music/The Great Ace Attorney Medley.mp3" />
       <h2>The Great Ace Attorney Medley</h2>
       <p>
         Game(s) released in 2015, 2017. Arranged by me in MuseScore May 2026.
@@ -192,7 +200,7 @@ function GreatAceAttorneyMedley() {
           </a>
         </li>
       </ul>
-    </div>
+    </DynamicMusicProvider>
   );
 }
 

@@ -67,6 +67,8 @@
   flex-direction: column;
   justify-content: center;
   transition: all 0.4s ease-in-out;
+  /* Adds a 20px structural safety gap at the top when scrolled into view */
+  scroll-margin-top: 20px; 
 }
 
 /* Highlight state */

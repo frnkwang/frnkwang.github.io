@@ -70,14 +70,17 @@ export const DynamicMusicProvider = ({ children }) => {
       .find((section) => currentTime >= section.time);
 
     if (section && activeSectionTitle !== section.title) {
-      // jump to the section, if present
       setActiveSectionTitle(section.title);
-      if (section.elementRef.current) {
-        section.elementRef.current.scrollIntoView({
-          behavior: "smooth",
-          block: "center",
-        });
-      }
+
+      // jump to the section, if present.
+      // Avoiding window.scrollIntoView because it struggles with other layout stuff
+      const elementRect = section.elementRef.current.getBoundingClientRect();
+      const absoluteElementTop = elementRect.top + window.pageYOffset;
+      const safetyOffset = 20; // 20 pixels of breathing room
+      window.scrollTo({
+        top: absoluteElementTop - safetyOffset,
+        behavior: "smooth",
+      });
     }
   };
 

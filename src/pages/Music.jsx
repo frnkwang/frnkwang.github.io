@@ -27,8 +27,8 @@ function MusicPage() {
         This music page serves as a way for me to share music - mostly my own
         compositions (with composer commentary!), but also any pieces that I
         find particularly interesting. For pieces I wrote, I've built the music
-        into the webpage, and you can choose to have the audio follow along as
-        you read my commentary.
+        into the webpage, and the page/analysis can scroll along as you listen
+        to the music.
       </p>
       <RecentPagesDisplay
         props={{

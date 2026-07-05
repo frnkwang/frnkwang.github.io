@@ -1,4 +1,11 @@
-import { useState, useRef, useEffect } from "react";
+import {
+  useState,
+  useRef,
+  useEffect,
+  createContext,
+  useContext,
+  act,
+} from "react";
 
 import styles from "./DynamicMusicPlayer.module.css";
 
@@ -35,24 +42,65 @@ function normalizeTimestampRemoveMicros(timeString) {
   return normalizeTimestamp(timeString).substring(0, 5);
 }
 
-export function DynamicMusicPlayer({ src, setDoSeek, seekToTime }) {
+const DynamicMusicContext = createContext();
+
+export const useDynamicMusicContext = () => useContext(DynamicMusicContext);
+
+export const DynamicMusicProvider = ({ children }) => {
+  const [activeSectionTitle, setActiveSectionTitle] = useState(null);
+
+  // title: {title, time, ref}
+  const sections = useRef({});
+  const registerSection = (title, time, elementRef) => {
+    if (Object.hasOwn(sections.current, title)) {
+      throw new Error(`Duplicate section title: ${title}`);
+    }
+    sections.current[title] = { title, time, elementRef };
+  };
+  const unregisterSection = (title) => {
+    delete sections.current[title];
+  };
+
+  // Triggered by DynamicMusicPlayer
+  const updatePlaybackTime = (currentTime) => {
+    const sectionsArray = Object.values(sections.current);
+    // sort and find
+    const section = sectionsArray
+      .sort((a, b) => b.time - a.time)
+      .find((section) => currentTime >= section.time);
+
+    if (section && activeSectionTitle !== section.title) {
+      // jump to the section, if present
+      setActiveSectionTitle(section.title);
+      if (section.elementRef.current) {
+        section.elementRef.current.scrollIntoView({
+          behavior: "smooth",
+          block: "center",
+        });
+      }
+    }
+  };
+
+  return (
+    <DynamicMusicContext.Provider
+      value={{
+        activeSectionTitle,
+        registerSection,
+        unregisterSection,
+        updatePlaybackTime,
+      }}
+    >
+      {children}
+    </DynamicMusicContext.Provider>
+  );
+};
+
+export function DynamicMusicPlayer({ src }) {
   const audioRef = useRef(null);
   const [isPlaying, setIsPlaying] = useState(false);
   const [currentTime, setCurrentTime] = useState(0);
   const [duration, setDuration] = useState(0);
-
-  // Listen for external scroll-based seek instructions from the Parent Page
-  useEffect(() => {
-    if (seekToTime !== null && audioRef.current) {
-      const seekTimeSec = convertToSeconds(seekToTime);
-      audioRef.current.currentTime = seekTimeSec;
-      setCurrentTime(seekTimeSec);
-    }
-  }, [seekToTime]);
-
-  const handleDoSeekChange = (event) => {
-    setDoSeek(event.target.checked);
-  };
+  const { updatePlaybackTime } = useDynamicMusicContext();
 
   const togglePlayPause = () => {
     if (isPlaying) {
@@ -67,12 +115,22 @@ export function DynamicMusicPlayer({ src, setDoSeek, seekToTime }) {
   };
 
   const onLoadedMetadata = () => setDuration(audioRef.current.duration);
-  const onTimeUpdate = () => setCurrentTime(audioRef.current.currentTime);
+  const onTimeUpdate = () => {
+    const time = audioRef.current.currentTime;
+    setCurrentTime(time);
+    if (updatePlaybackTime) {
+      updatePlaybackTime(time);
+    }
+  };
 
+  // handler for scrolling
   const handleProgressChange = (e) => {
     const newTime = Number(e.target.value);
     audioRef.current.currentTime = newTime;
     setCurrentTime(newTime);
+    if (updatePlaybackTime) {
+      updatePlaybackTime(newTime);
+    }
   };
 
   const formatTime = (time) => {
@@ -90,17 +148,10 @@ export function DynamicMusicPlayer({ src, setDoSeek, seekToTime }) {
         onLoadedMetadata={onLoadedMetadata}
         onTimeUpdate={onTimeUpdate}
       />
-      <label style={{ display: "flex", gap: "8px", alignItems: "center" }}>
-        <input type="checkbox" onChange={handleDoSeekChange} />
-        <span>Seek audio while reading</span>
-      </label>
       <button onClick={togglePlayPause} className={styles.playerControlBtn}>
         {isPlaying ? "⏸ Pause" : "▶ Play"}
       </button>
       <div className={styles.playerSliderContainer}>
-        <span className={styles.playerTimeLabel}>
-          {formatTime(currentTime)}
-        </span>
         <input
           type="range"
           min="0"
@@ -115,55 +166,30 @@ export function DynamicMusicPlayer({ src, setDoSeek, seekToTime }) {
   );
 }
 
-export function DynamicMusicSection({
-  sectionTitle,
-  targetTime,
-  currentTargetTime,
-  onTriggerSeek,
-  children,
-}) {
-  const sectionRef = useRef(null);
-  const isHighlighted = currentTargetTime === targetTime;
+export const DynamicMusicSection = ({ title, time, children }) => {
+  const cardRef = useRef(null);
+  const { activeSectionTitle, registerSection, unregisterSection } =
+    useDynamicMusicContext();
+
+  const isHighlighted = activeSectionTitle === title;
 
   useEffect(() => {
-    const observerOptions = {
-      root: null,
-      rootMargin: "-50% 0px -50% 0px",
-      threshold: 0,
-    };
+    // Register DOM ref dynamically with the DynamicMusicProvider
+    registerSection(title, convertToSeconds(time), cardRef);
 
-    const observerCallback = (entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          onTriggerSeek(targetTime);
-        }
-      });
-    };
-
-    const observer = new IntersectionObserver(
-      observerCallback,
-      observerOptions,
-    );
-    if (sectionRef.current) {
-      observer.observe(sectionRef.current);
-    }
-
-    return () => {
-      if (sectionRef.current) {
-        observer.unobserve(sectionRef.current);
-      }
-    };
-  }, [targetTime, onTriggerSeek]);
+    // Unregister if component disappears from layout tree
+    return () => unregisterSection(title);
+  }, [title, time]);
 
   return (
     <div
-      ref={sectionRef}
+      ref={cardRef}
       className={`${styles.contentSectionCard} ${isHighlighted ? styles.isHighlighted : ""}`}
     >
       <h3>
-        {sectionTitle} ({normalizeTimestampRemoveMicros(targetTime)})
+        {title} ({normalizeTimestampRemoveMicros(time)})
       </h3>
       {children}
     </div>
   );
-}
+};

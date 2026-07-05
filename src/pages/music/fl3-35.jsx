@@ -2,9 +2,9 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 import {
   DynamicMusicPlayer,
+  DynamicMusicProvider,
   DynamicMusicSection,
 } from "../../components/DynamicMusicPlayer";
-import styles from "../../components/DynamicMusicPlayer.module.css";
 
 import img from "../../assets/fl3-35.png";
 import MusicNotation from "../../components/MusicNotation";
@@ -14,22 +14,9 @@ export const DISPLAY_IMAGE = img;
 export const CREATION_DATE = new Date("2020/05/07");
 
 function FL3_35() {
-  // in "MM:SS.ffffff" format
-  const [seekToTime, setSeekToTime] = useState(null);
-  const [doSeek, setDoSeek] = useState(false);
-
-  const maybeSeek = (targetTime) => {
-    if (doSeek) setSeekToTime(targetTime);
-  };
-
   return (
-    <div>
-      <div className={styles.observerIndicatorLine} />
-      <DynamicMusicPlayer
-        src="/music/FL3-35.mp3"
-        setDoSeek={setDoSeek}
-        seekToTime={seekToTime}
-      />
+    <DynamicMusicProvider>
+      <DynamicMusicPlayer src="/music/FL3-35.mp3" />
       <h2>FL3-35: Broken Seal</h2>
       <p>
         Composed/produced by me in FL Studio Mobile 3; Finished May 7th, 2020
@@ -104,12 +91,7 @@ function FL3_35() {
         <MusicNotation musicKey="Em" noteDuration="1/16" notes="B3B B2B2" />
         which appears a lot later, and I’ll talk about later.
       </p>
-      <DynamicMusicSection
-        sectionTitle="Opening Murmurs"
-        targetTime={"00:00"}
-        currentTargetTime={seekToTime}
-        onTriggerSeek={maybeSeek}
-      >
+      <DynamicMusicSection title="Opening Murmurs" time={"00:00"}>
         The piece starts, quietly, ominously, with rhythm 1. It’s one E,
         repeated:
         <MusicNotation
@@ -137,12 +119,7 @@ function FL3_35() {
         main theme. Also, this is the first time I modulated to the dominant so
         I could resolve back to the tonic, and I think it was very convincing.
       </DynamicMusicSection>
-      <DynamicMusicSection
-        sectionTitle="Main Theme"
-        targetTime={"00:54.4"}
-        currentTargetTime={seekToTime}
-        onTriggerSeek={maybeSeek}
-      >
+      <DynamicMusicSection title="Main Theme" time={"00:54.4"}>
         The next bit, the main theme, is a bit interesting. First, because it
         doesn’t really fall perfectly into any of the rhythms I mentioned
         before, and second, because it introduces the rhythmic motif I mentioned
@@ -165,12 +142,7 @@ function FL3_35() {
         a standard 4-beat pattern, but with an extra beat. This kinda reinforces
         the 4+1 I’ve established here.
       </DynamicMusicSection>
-      <DynamicMusicSection
-        sectionTitle="Transition and Modulation"
-        targetTime={"01:12.7"}
-        currentTargetTime={seekToTime}
-        onTriggerSeek={maybeSeek}
-      >
+      <DynamicMusicSection title="Transition and Modulation" time={"01:12.7"}>
         After this, we are introduced to a new idea, which is primarily using
         the second rhythm:
         <MusicNotation
@@ -215,12 +187,7 @@ function FL3_35() {
         first for me in that it’s the first “subtle” key change I’ve written,
         changing towards B minor in the last two bars.
       </DynamicMusicSection>
-      <DynamicMusicSection
-        sectionTitle="Murmurs again"
-        targetTime={"01:49.08"}
-        currentTargetTime={seekToTime}
-        onTriggerSeek={maybeSeek}
-      >
+      <DynamicMusicSection title="Murmurs again" time={"01:49.08"}>
         The next bit is a restatement of the first theme, with different
         instruments, some trills, and in B. It’s not that noteworthy, and I
         don’t have much to say about it. The last two bars actually go from in
@@ -236,12 +203,7 @@ function FL3_35() {
         the melody is on the offbeats. Honestly though, this is really a
         transition. The melody isn’t very interesting.
       </DynamicMusicSection>
-      <DynamicMusicSection
-        sectionTitle="Haunting Chorale"
-        targetTime={"02:34.47"}
-        currentTargetTime={seekToTime}
-        onTriggerSeek={maybeSeek}
-      >
+      <DynamicMusicSection title="Haunting Chorale" time={"02:34.47"}>
         The next section, shockingly, is a choral section over the same
         bassline. This is the first time the 2+3 rhythm is played, with a nearly
         haunting choral line. The quiet drum may suggest that this is a 4+1
@@ -270,12 +232,7 @@ function FL3_35() {
         I say it’s interesting because it spans over two bars, which in a way,
         makes it harder to tell that it’s in 5. This is subtlely used later too.
       </DynamicMusicSection>
-      <DynamicMusicSection
-        sectionTitle="Crashing Back"
-        targetTime={"03:01.8"}
-        currentTargetTime={seekToTime}
-        onTriggerSeek={maybeSeek}
-      >
+      <DynamicMusicSection title="Crashing Back" time={"03:01.8"}>
         After building out of the choral section, we are again introduced to
         rhythm 1. This time, it builds off a E diminished 7th chord over 8 bars,
         gradually making the rhythm more complex, but still remaining distinctly
@@ -307,12 +264,7 @@ function FL3_35() {
         odd, but we are immediately reoriented by a big bass drum hit on the
         downbeat of the next phrase.
       </DynamicMusicSection>
-      <DynamicMusicSection
-        sectionTitle="Rhythmic Ominousness"
-        targetTime={"03:38.17"}
-        currentTargetTime={seekToTime}
-        onTriggerSeek={maybeSeek}
-      >
+      <DynamicMusicSection title="Rhythmic Ominousness" time={"03:38.17"}>
         The next few bars are transition, but it reintroduces two things that
         were mostly glossed over before:
         <MusicNotation noteDuration="1/16" notes="B3B B2B2" /> and{" "}
@@ -376,10 +328,8 @@ function FL3_35() {
         leads back into the main theme very well.
       </DynamicMusicSection>
       <DynamicMusicSection
-        sectionTitle="Chorus, Transition, and Coda"
-        targetTime={"04:23.6"}
-        currentTargetTime={seekToTime}
-        onTriggerSeek={maybeSeek}
+        title="Chorus, Transition, and Coda"
+        time={"04:23.6"}
       >
         The rest of the piece isn’t really that interesting anymore. The main
         theme plays, then the corresponding 16th note rhythm 2 line plays. Then,
@@ -437,7 +387,7 @@ function FL3_35() {
         <li>piano in F#</li>
         <li>theme 1 in F#</li>
       </ul>
-    </div>
+    </DynamicMusicProvider>
   );
 }
 

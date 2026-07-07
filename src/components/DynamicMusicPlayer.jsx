@@ -168,7 +168,7 @@ export function DynamicMusicPlayer({ title, src }) {
   const handleProgressChange = (e) => {
     const seconds = Number(e.target.value);
     setCurrentTime(seconds);
-    if (maybeScrollToSection) {
+    if (maybeScrollToSection && shouldScrollWithMusic) {
       maybeScrollToSection(seconds);
     }
   };
@@ -188,7 +188,7 @@ export function DynamicMusicPlayer({ title, src }) {
     isScrubbingRef.current = false;
     // Synchronize media player to final slider coordinates once
     audioRef.current.currentTime = currentTime;
-    if (maybeScrollToSection) {
+    if (maybeScrollToSection && shouldScrollWithMusic) {
       maybeScrollToSection(currentTime);
     }
     if (isPlaying)

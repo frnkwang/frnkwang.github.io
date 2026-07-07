@@ -161,7 +161,11 @@ export function DynamicMusicPlayer({ title, src }) {
 
   // handler for scrubbing
   const handleProgressChange = (e) => {
-    setCurrentTime(Number(e.target.value));
+    const seconds = Number(e.target.value);
+    setCurrentTime(seconds);
+    if (maybeScrollToSection) {
+      maybeScrollToSection(seconds);
+    }
   };
 
   const formatTime = (time) => {

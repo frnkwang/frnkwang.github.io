@@ -18,6 +18,7 @@ export function MusicNotation({ musicKey, meter, noteDuration, notes }) {
     abc.renderAbc(id, abcNotation, {
       responsive: "resize",
       staffwidth: 0, // 0 allows it to contract to its minimum content width
+      selectTypes: false,
     });
   }, [abcNotation]);
 

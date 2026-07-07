@@ -222,7 +222,9 @@ export function DynamicMusicPlayer({ title, src }) {
             onTouchStart={handleScrubStart}
             onTouchEnd={handleScrubEnd}
           />
-          <span className={styles.playerTimeLabel}>{formatTime(duration)}</span>
+          <span
+            className={styles.playerTimeLabel}
+          >{`${formatTime(currentTime)}/${formatTime(duration)}`}</span>
         </div>
       </div>
     </div>

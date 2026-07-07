@@ -115,6 +115,10 @@ export function DynamicMusicPlayer({ src }) {
   const [duration, setDuration] = useState(0);
   const { maybeScrollToSection, playerSeekRef } = useDynamicMusicContext();
 
+  // Used to stop forcing audio jumps while scrubbing
+  // Helps performance
+  const isScrubbingRef = useRef(false);
+
   const jumpToTime = (seconds) => {
     audioRef.current.currentTime = seconds;
     setCurrentTime(seconds);
@@ -144,8 +148,7 @@ export function DynamicMusicPlayer({ src }) {
 
   const onLoadedMetadata = () => setDuration(audioRef.current.duration);
   const onTimeUpdate = () => {
-    // Don't need to call jumpToTime,
-    // this is only called by the audio player advancing to the right time anyway
+    if (isScrubbingRef.current) return;
     const time = audioRef.current.currentTime;
     setCurrentTime(time);
     if (maybeScrollToSection) {
@@ -167,6 +170,23 @@ export function DynamicMusicPlayer({ src }) {
     return `${minutes}:${seconds < 10 ? "0" : ""}${seconds}`;
   };
 
+  const handleScrubStart = () => {
+    isScrubbingRef.current = true;
+    audioRef.current.pause();
+  };
+  const handleScrubEnd = () => {
+    isScrubbingRef.current = false;
+    // Synchronize media player to final slider coordinates once
+    audioRef.current.currentTime = currentTime;
+    if (maybeScrollToSection) {
+      maybeScrollToSection(currentTime);
+    }
+    if (isPlaying)
+      audioRef.current
+        .play()
+        .catch((error) => console.error("Playback failed:", error));
+  };
+
   return (
     <div className={styles.floatingPlayerContainer}>
       <audio
@@ -186,6 +206,10 @@ export function DynamicMusicPlayer({ src }) {
           value={currentTime}
           onChange={handleProgressChange}
           className={styles.playerSlider}
+          onMouseDown={handleScrubStart}
+          onMouseUp={handleScrubEnd}
+          onTouchStart={handleScrubStart}
+          onTouchEnd={handleScrubEnd}
         />
         <span className={styles.playerTimeLabel}>{formatTime(duration)}</span>
       </div>

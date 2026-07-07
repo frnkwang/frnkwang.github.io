@@ -104,6 +104,9 @@ export const DynamicMusicProvider = ({ children }) => {
       }}
     >
       {children}
+
+      {/* Add space to prevent music player from covering content */}
+      <div className={styles.playerLayoutSpacer} />
     </DynamicMusicContext.Provider>
   );
 };

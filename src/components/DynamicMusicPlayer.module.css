@@ -1,5 +1,13 @@
 /* Music player itself */
 
+/* Appended to end of page so that the music player doesn't hide content */
+.playerLayoutSpacer {
+  height: 80px; 
+  width: 100%;
+  visibility: hidden;
+  pointer-events: none;
+}
+
 /* Container that locks the player permanently to the viewport bottom */
 .floatingPlayerContainer {
   position: fixed;

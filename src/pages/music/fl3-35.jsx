@@ -15,7 +15,7 @@ export const CREATION_DATE = new Date("2020/05/07");
 
 function FL3_35() {
   return (
-    <DynamicMusicProvider>
+    <DynamicMusicProvider color="#992012">
       <DynamicMusicPlayer title="FL3-35: Broken Seal" src="/music/FL3-35.mp3" />
       <h2>FL3-35: Broken Seal</h2>
       <p>

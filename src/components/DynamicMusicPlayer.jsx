@@ -46,7 +46,7 @@ const DynamicMusicContext = createContext();
 
 export const useDynamicMusicContext = () => useContext(DynamicMusicContext);
 
-export const DynamicMusicProvider = ({ children }) => {
+export const DynamicMusicProvider = ({ color = "blue", children }) => {
   const [activeSectionTitle, setActiveSectionTitle] = useState(null);
   const playerSeekRef = useRef(null); // ref to player's function to set time
 
@@ -101,6 +101,7 @@ export const DynamicMusicProvider = ({ children }) => {
         unregisterSection, // call to unregister a section
         maybeScrollToSection, // called by player when updating time so context knows when to scroll
         playerSeekRef, // music player will set this to a function to jump to a time
+        color, // used for player and cards
       }}
     >
       {children}
@@ -116,7 +117,8 @@ export function DynamicMusicPlayer({ title, src }) {
   const [isPlaying, setIsPlaying] = useState(false);
   const [currentTime, setCurrentTime] = useState(0);
   const [duration, setDuration] = useState(0);
-  const { maybeScrollToSection, playerSeekRef } = useDynamicMusicContext();
+  const { maybeScrollToSection, playerSeekRef, color } =
+    useDynamicMusicContext();
 
   // only affects scrolling with playback, not the buttons to jump to sections
   const [shouldScrollWithMusic, setShouldScrolWithMusic] = useState(true);
@@ -211,12 +213,19 @@ export function DynamicMusicPlayer({ title, src }) {
         />
         Scroll with music
       </label>
-      <button onClick={togglePlayPause} className={styles.playerControlBtn}>
+      <button
+        onClick={togglePlayPause}
+        className={styles.playerControlBtn}
+        style={{ background: color }}
+      >
         {isPlaying ? "⏸ Pause" : "▶ Play"}
       </button>
       <div className={styles.playerTextAndTrackColumn}>
         <h4 className={styles.playerTrackTitle}>{title}</h4>
-        <div className={styles.playerSliderContainer}>
+        <div
+          className={styles.playerSliderContainer}
+          style={{ accentColor: color }}
+        >
           <input
             type="range"
             min="0"
@@ -228,6 +237,7 @@ export function DynamicMusicPlayer({ title, src }) {
             onMouseUp={handleScrubEnd}
             onTouchStart={handleScrubStart}
             onTouchEnd={handleScrubEnd}
+            style={{ accentColor: color }}
           />
           <span
             className={styles.playerTimeLabel}
@@ -245,6 +255,7 @@ export const DynamicMusicSection = ({ title, time, children }) => {
     registerSection,
     unregisterSection,
     playerSeekRef,
+    color,
   } = useDynamicMusicContext();
 
   const isHighlighted = activeSectionTitle === title;
@@ -266,6 +277,11 @@ export const DynamicMusicSection = ({ title, time, children }) => {
     <div
       ref={cardRef}
       className={`${styles.contentSectionCard} ${isHighlighted ? styles.isHighlighted : ""}`}
+      style={
+        isHighlighted
+          ? { borderLeftColor: color }
+          : { borderLeft: `5px solid ${color}` }
+      }
     >
       <h3>
         {title} ({normalizeTimestampRemoveMicros(time)})

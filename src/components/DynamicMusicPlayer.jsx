@@ -115,6 +115,9 @@ export function DynamicMusicPlayer({ src }) {
   const [duration, setDuration] = useState(0);
   const { maybeScrollToSection, playerSeekRef } = useDynamicMusicContext();
 
+  // only affects scrolling with playback, not the buttons to jump to sections
+  const [shouldScrollWithMusic, setShouldScrolWithMusic] = useState(true);
+
   // Used to stop forcing audio jumps while scrubbing
   // Helps performance
   const isScrubbingRef = useRef(false);
@@ -151,16 +154,14 @@ export function DynamicMusicPlayer({ src }) {
     if (isScrubbingRef.current) return;
     const time = audioRef.current.currentTime;
     setCurrentTime(time);
-    if (maybeScrollToSection) {
+    if (maybeScrollToSection && shouldScrollWithMusic) {
       maybeScrollToSection(time);
     }
   };
 
-  // handler for scrolling
+  // handler for scrubbing
   const handleProgressChange = (e) => {
-    const newTime = Number(e.target.value);
-    audioRef.current.currentTime = newTime;
-    jumpToTime(newTime);
+    setCurrentTime(Number(e.target.value));
   };
 
   const formatTime = (time) => {
@@ -195,6 +196,14 @@ export function DynamicMusicPlayer({ src }) {
         onLoadedMetadata={onLoadedMetadata}
         onTimeUpdate={onTimeUpdate}
       />
+      <label>
+        <input
+          type="checkbox"
+          checked={shouldScrollWithMusic}
+          onChange={(e) => setShouldScrolWithMusic(e.target.checked)}
+        />
+        Scroll with music
+      </label>
       <button onClick={togglePlayPause} className={styles.playerControlBtn}>
         {isPlaying ? "⏸ Pause" : "▶ Play"}
       </button>

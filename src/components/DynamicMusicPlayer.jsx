@@ -108,7 +108,7 @@ export const DynamicMusicProvider = ({ children }) => {
   );
 };
 
-export function DynamicMusicPlayer({ src }) {
+export function DynamicMusicPlayer({ title, src }) {
   const audioRef = useRef(null);
   const [isPlaying, setIsPlaying] = useState(false);
   const [currentTime, setCurrentTime] = useState(0);
@@ -207,20 +207,23 @@ export function DynamicMusicPlayer({ src }) {
       <button onClick={togglePlayPause} className={styles.playerControlBtn}>
         {isPlaying ? "⏸ Pause" : "▶ Play"}
       </button>
-      <div className={styles.playerSliderContainer}>
-        <input
-          type="range"
-          min="0"
-          max={duration || 0}
-          value={currentTime}
-          onChange={handleProgressChange}
-          className={styles.playerSlider}
-          onMouseDown={handleScrubStart}
-          onMouseUp={handleScrubEnd}
-          onTouchStart={handleScrubStart}
-          onTouchEnd={handleScrubEnd}
-        />
-        <span className={styles.playerTimeLabel}>{formatTime(duration)}</span>
+      <div className={styles.playerTextAndTrackColumn}>
+        <h4 className={styles.playerTrackTitle}>{title}</h4>
+        <div className={styles.playerSliderContainer}>
+          <input
+            type="range"
+            min="0"
+            max={duration || 0}
+            value={currentTime}
+            onChange={handleProgressChange}
+            className={styles.playerSlider}
+            onMouseDown={handleScrubStart}
+            onMouseUp={handleScrubEnd}
+            onTouchStart={handleScrubStart}
+            onTouchEnd={handleScrubEnd}
+          />
+          <span className={styles.playerTimeLabel}>{formatTime(duration)}</span>
+        </div>
       </div>
     </div>
   );

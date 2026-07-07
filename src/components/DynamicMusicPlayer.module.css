@@ -5,16 +5,30 @@
   position: fixed;
   bottom: 0;
   left: 0;
-  right: 0;
+  right: 0; /* Keep it edge-to-edge for the background color fill */
   z-index: 9999;
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 20px;
-  padding: 16px 24px;
-  background: #f4f4f4; ;
+  background: #f4f4f4;
   border-top: 1px solid #282828;
   box-shadow: 0 -4px 10px rgba(0, 0, 0, 0.3);
+  box-sizing: border-box;
+
+  /* DYNAMIC PADDING TRICK:
+    Subtracts the app's maximum content width (900px minus its 40px padding = 860px) 
+    from the screen width, then splits the remaining space into left/right padding.
+    This holds the player content inside the 900px bounds automatically.
+  */
+  padding: 16px calc((100% - 860px) / 2); 
+}
+
+/* Fallback padding for when the screen is smaller than the app's max-width */
+@media (max-width: 900px) {
+  .floatingPlayerContainer {
+    padding: 16px 24px;
+  }
 }
 
 /* Controller play/pause trigger button */
@@ -55,6 +69,29 @@
   user-select: none;
 }
 
+/* Vertical column stacking the text directly above the tracking slider bar */
+.playerTextAndTrackColumn {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 4px; 
+  flex-grow: 1;
+  min-width: 0; /* Prevents text overflow from expanding the layout boundary */
+}
+
+/* Track Title Text Enhancements */
+.playerTrackTitle {
+  margin: 0;
+  padding: 0;
+  font-size: 0.9rem;
+  font-weight: 600;
+  line-height: 1.2;
+  max-width: 220px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
 /* Card components for each section/benchmark */
 
 /* The base card layout transition */
@@ -67,7 +104,6 @@
   flex-direction: column;
   justify-content: center;
   transition: all 0.4s ease-in-out;
-  /* Adds a 20px structural safety gap at the top when scrolled into view */
   scroll-margin-top: 20px; 
 }
 
@@ -76,7 +112,7 @@
   background: #e8f7ed;
   border-left-color: #1d27b9;
   box-shadow: 0 0 15px rgba(14, 76, 247, 0.39);
-  transform: scale(1.01); /* Subtle pop effect */
+  transform: scale(1.01);
 }
 
 /* New Action Jump Button */
@@ -92,7 +128,7 @@
   cursor: pointer;
   display: inline-flex;
   align-items: center;
-  gap:6px;
+  gap: 6px;
   transition: all 0.2s ease;
 }
 

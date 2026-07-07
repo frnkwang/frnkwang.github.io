@@ -79,14 +79,38 @@
   transform: scale(1.01); /* Subtle pop effect */
 }
 
-/* Indicate where the observer line is */
-.observerIndicatorLine {
-  position: fixed;
-  top: 50%; /* Associated with the -50% in DynamicMusicSection */
-  left: 0;
-  right: 0;
-  height: 2px;
-  background-color: #ff3b30;
-  z-index: -1;
-  pointer-events: none;   /* Ensures users can still click on elements underneath it */
+/* New Action Jump Button */
+.jumpToTimeBtn {
+  background: #f3f4f6;
+  color: #4b5563;
+  border: 1px solid #e5e7eb;
+  margin: 0px 20px;
+  padding: 6px 12px;
+  border-radius: 8px;
+  font-size: 0.85rem;
+  font-weight: 500;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap:6px;
+  transition: all 0.2s ease;
+}
+
+.jumpToTimeBtn:hover {
+  background: #3b82f6;
+  color: #ffffff;
+  border-color: #3b82f6;
+}
+
+/* Subtle styling adjustment for the jump button inside the active card */
+.contentSectionCard.isHighlighted .jumpToTimeBtn {
+  background: #ffffff;
+  border-color: #bfdbfe;
+  color: #2563eb;
+}
+
+.contentSectionCard.isHighlighted .jumpToTimeBtn:hover {
+  background: #2563eb;
+  color: #ffffff;
+  border-color: #2563eb;
 }

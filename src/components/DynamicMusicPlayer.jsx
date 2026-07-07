@@ -4,7 +4,7 @@ import {
   useEffect,
   createContext,
   useContext,
-  act,
+  useCallback,
 } from "react";
 
 import styles from "./DynamicMusicPlayer.module.css";
@@ -48,6 +48,7 @@ export const useDynamicMusicContext = () => useContext(DynamicMusicContext);
 
 export const DynamicMusicProvider = ({ children }) => {
   const [activeSectionTitle, setActiveSectionTitle] = useState(null);
+  const playerSeekRef = useRef(null); // ref to player's function to set time
 
   // title: {title, time, ref}
   const sections = useRef({});
@@ -62,35 +63,44 @@ export const DynamicMusicProvider = ({ children }) => {
   };
 
   // Triggered by DynamicMusicPlayer
-  const updatePlaybackTime = (currentTime) => {
+  const maybeScrollToSection = useCallback((currentTime) => {
     const sectionsArray = Object.values(sections.current);
-    // sort and find
-    const section = sectionsArray
+    if (sectionsArray.length === 0) return;
+
+    const matchedSection = sectionsArray
       .sort((a, b) => b.time - a.time)
       .find((section) => currentTime >= section.time);
 
-    if (section && activeSectionTitle !== section.title) {
-      setActiveSectionTitle(section.title);
+    if (matchedSection) {
+      setActiveSectionTitle((prevTitle) => {
+        // Skip if we are already in this highlighted block
+        if (prevTitle === matchedSection.title) return prevTitle;
 
-      // jump to the section, if present.
-      // Avoiding window.scrollIntoView because it struggles with other layout stuff
-      const elementRect = section.elementRef.current.getBoundingClientRect();
-      const absoluteElementTop = elementRect.top + window.pageYOffset;
-      const safetyOffset = 20; // 20 pixels of breathing room
-      window.scrollTo({
-        top: absoluteElementTop - safetyOffset,
-        behavior: "smooth",
+        // avoid window.scrollIntoView, it struggles with some layout stuff
+        if (matchedSection.elementRef.current) {
+          const element = matchedSection.elementRef.current;
+          const absoluteElementTop =
+            element.getBoundingClientRect().top + window.scrollY;
+          const safetyOffset = 20;
+
+          window.scrollTo({
+            top: absoluteElementTop - safetyOffset,
+            behavior: "smooth",
+          });
+        }
+        return matchedSection.title;
       });
     }
-  };
+  }, []);
 
   return (
     <DynamicMusicContext.Provider
       value={{
-        activeSectionTitle,
-        registerSection,
-        unregisterSection,
-        updatePlaybackTime,
+        activeSectionTitle, // title of the currently playing section
+        registerSection, // call to register a section
+        unregisterSection, // call to unregister a section
+        maybeScrollToSection, // called by player when updating time so context knows when to scroll
+        playerSeekRef, // music player will set this to a function to jump to a time
       }}
     >
       {children}
@@ -103,7 +113,22 @@ export function DynamicMusicPlayer({ src }) {
   const [isPlaying, setIsPlaying] = useState(false);
   const [currentTime, setCurrentTime] = useState(0);
   const [duration, setDuration] = useState(0);
-  const { updatePlaybackTime } = useDynamicMusicContext();
+  const { maybeScrollToSection, playerSeekRef } = useDynamicMusicContext();
+
+  const jumpToTime = (seconds) => {
+    audioRef.current.currentTime = seconds;
+    setCurrentTime(seconds);
+    if (maybeScrollToSection) {
+      maybeScrollToSection(seconds);
+    }
+  };
+
+  useEffect(() => {
+    if (playerSeekRef) playerSeekRef.current = jumpToTime;
+    return () => {
+      if (playerSeekRef) playerSeekRef.current = null;
+    };
+  }, [playerSeekRef]);
 
   const togglePlayPause = () => {
     if (isPlaying) {
@@ -119,10 +144,12 @@ export function DynamicMusicPlayer({ src }) {
 
   const onLoadedMetadata = () => setDuration(audioRef.current.duration);
   const onTimeUpdate = () => {
+    // Don't need to call jumpToTime,
+    // this is only called by the audio player advancing to the right time anyway
     const time = audioRef.current.currentTime;
     setCurrentTime(time);
-    if (updatePlaybackTime) {
-      updatePlaybackTime(time);
+    if (maybeScrollToSection) {
+      maybeScrollToSection(time);
     }
   };
 
@@ -130,10 +157,7 @@ export function DynamicMusicPlayer({ src }) {
   const handleProgressChange = (e) => {
     const newTime = Number(e.target.value);
     audioRef.current.currentTime = newTime;
-    setCurrentTime(newTime);
-    if (updatePlaybackTime) {
-      updatePlaybackTime(newTime);
-    }
+    jumpToTime(newTime);
   };
 
   const formatTime = (time) => {
@@ -171,18 +195,27 @@ export function DynamicMusicPlayer({ src }) {
 
 export const DynamicMusicSection = ({ title, time, children }) => {
   const cardRef = useRef(null);
-  const { activeSectionTitle, registerSection, unregisterSection } =
-    useDynamicMusicContext();
+  const {
+    activeSectionTitle,
+    registerSection,
+    unregisterSection,
+    playerSeekRef,
+  } = useDynamicMusicContext();
 
   const isHighlighted = activeSectionTitle === title;
+  const timeInSeconds = convertToSeconds(time);
+
+  const handleJumpClick = () => {
+    playerSeekRef.current(timeInSeconds);
+  };
 
   useEffect(() => {
     // Register DOM ref dynamically with the DynamicMusicProvider
-    registerSection(title, convertToSeconds(time), cardRef);
+    registerSection(title, timeInSeconds, cardRef);
 
     // Unregister if component disappears from layout tree
     return () => unregisterSection(title);
-  }, [title, time]);
+  }, [title, timeInSeconds, registerSection, unregisterSection]);
 
   return (
     <div
@@ -191,7 +224,11 @@ export const DynamicMusicSection = ({ title, time, children }) => {
     >
       <h3>
         {title} ({normalizeTimestampRemoveMicros(time)})
+        <button onClick={handleJumpClick} className={styles.jumpToTimeBtn}>
+          ⏭ Jump to Section
+        </button>
       </h3>
+
       {children}
     </div>
   );

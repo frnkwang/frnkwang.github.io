@@ -52,15 +52,6 @@
   transition: background-color 0.2s ease;
 }
 
-/* Timeline flex wrapper */
-.playerSliderContainer {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  flex-grow: 1;
-  max-width: 600px;
-}
-
 /* Interactive native input range scrubber */
 .playerSlider {
   flex-grow: 1;

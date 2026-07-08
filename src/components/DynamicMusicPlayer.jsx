@@ -222,27 +222,22 @@ export function DynamicMusicPlayer({ title, src }) {
       </button>
       <div className={styles.playerTextAndTrackColumn}>
         <h4 className={styles.playerTrackTitle}>{title}</h4>
-        <div
-          className={styles.playerSliderContainer}
+        <input
+          type="range"
+          min="0"
+          max={duration || 0}
+          value={currentTime}
+          onChange={handleProgressChange}
+          className={styles.playerSlider}
+          onMouseDown={handleScrubStart}
+          onMouseUp={handleScrubEnd}
+          onTouchStart={handleScrubStart}
+          onTouchEnd={handleScrubEnd}
           style={{ accentColor: color }}
-        >
-          <input
-            type="range"
-            min="0"
-            max={duration || 0}
-            value={currentTime}
-            onChange={handleProgressChange}
-            className={styles.playerSlider}
-            onMouseDown={handleScrubStart}
-            onMouseUp={handleScrubEnd}
-            onTouchStart={handleScrubStart}
-            onTouchEnd={handleScrubEnd}
-            style={{ accentColor: color }}
-          />
-          <span
-            className={styles.playerTimeLabel}
-          >{`${formatTime(currentTime)}/${formatTime(duration)}`}</span>
-        </div>
+        />
+        <span
+          className={styles.playerTimeLabel}
+        >{`${formatTime(currentTime)}/${formatTime(duration)}`}</span>
       </div>
     </div>
   );

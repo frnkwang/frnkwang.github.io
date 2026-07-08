@@ -63,7 +63,7 @@ export const DynamicMusicProvider = ({ color = "blue", children }) => {
   };
 
   // Triggered by DynamicMusicPlayer
-  const maybeScrollToSection = useCallback((currentTime) => {
+  const onMusicTimestampChanged = useCallback((currentTime, doScroll) => {
     const sectionsArray = Object.values(sections.current);
     if (sectionsArray.length === 0) return;
 
@@ -77,7 +77,7 @@ export const DynamicMusicProvider = ({ color = "blue", children }) => {
         if (prevTitle === matchedSection.title) return prevTitle;
 
         // avoid window.scrollIntoView, it struggles with some layout stuff
-        if (matchedSection.elementRef.current) {
+        if (doScroll && matchedSection.elementRef.current) {
           const element = matchedSection.elementRef.current;
           const absoluteElementTop =
             element.getBoundingClientRect().top + window.scrollY;
@@ -99,7 +99,7 @@ export const DynamicMusicProvider = ({ color = "blue", children }) => {
         activeSectionTitle, // title of the currently playing section
         registerSection, // call to register a section
         unregisterSection, // call to unregister a section
-        maybeScrollToSection, // called by player when updating time so context knows when to scroll
+        onMusicTimestampChanged, // called by player when updating time so context knows when to scroll
         playerSeekRef, // music player will set this to a function to jump to a time
         color, // used for player and cards
       }}
@@ -117,11 +117,11 @@ export function DynamicMusicPlayer({ title, src }) {
   const [isPlaying, setIsPlaying] = useState(false);
   const [currentTime, setCurrentTime] = useState(0);
   const [duration, setDuration] = useState(0);
-  const { maybeScrollToSection, playerSeekRef, color } =
+  const { onMusicTimestampChanged, playerSeekRef, color } =
     useDynamicMusicContext();
 
   // only affects scrolling with playback, not the buttons to jump to sections
-  const [shouldScrollWithMusic, setShouldScrolWithMusic] = useState(true);
+  const [doScrollWithMusic, setDoScrollWithMusic] = useState(true);
 
   // Used to stop forcing audio jumps while scrubbing
   // Helps performance
@@ -130,8 +130,8 @@ export function DynamicMusicPlayer({ title, src }) {
   const jumpToTime = (seconds) => {
     audioRef.current.currentTime = seconds;
     setCurrentTime(seconds);
-    if (maybeScrollToSection) {
-      maybeScrollToSection(seconds);
+    if (onMusicTimestampChanged) {
+      onMusicTimestampChanged(seconds, doScrollWithMusic);
     }
   };
 
@@ -159,8 +159,8 @@ export function DynamicMusicPlayer({ title, src }) {
     if (isScrubbingRef.current) return;
     const time = audioRef.current.currentTime;
     setCurrentTime(time);
-    if (maybeScrollToSection && shouldScrollWithMusic) {
-      maybeScrollToSection(time);
+    if (onMusicTimestampChanged) {
+      onMusicTimestampChanged(time, doScrollWithMusic);
     }
   };
 
@@ -168,8 +168,8 @@ export function DynamicMusicPlayer({ title, src }) {
   const handleProgressChange = (e) => {
     const seconds = Number(e.target.value);
     setCurrentTime(seconds);
-    if (maybeScrollToSection && shouldScrollWithMusic) {
-      maybeScrollToSection(seconds);
+    if (onMusicTimestampChanged) {
+      onMusicTimestampChanged(seconds, doScrollWithMusic);
     }
   };
 
@@ -188,8 +188,8 @@ export function DynamicMusicPlayer({ title, src }) {
     isScrubbingRef.current = false;
     // Synchronize media player to final slider coordinates once
     audioRef.current.currentTime = currentTime;
-    if (maybeScrollToSection && shouldScrollWithMusic) {
-      maybeScrollToSection(currentTime);
+    if (onMusicTimestampChanged) {
+      onMusicTimestampChanged(currentTime, doScrollWithMusic);
     }
     if (isPlaying)
       audioRef.current
@@ -208,8 +208,8 @@ export function DynamicMusicPlayer({ title, src }) {
       <label>
         <input
           type="checkbox"
-          checked={shouldScrollWithMusic}
-          onChange={(e) => setShouldScrolWithMusic(e.target.checked)}
+          checked={doScrollWithMusic}
+          onChange={(e) => setDoScrollWithMusic(e.target.checked)}
         />
         Scroll with music
       </label>

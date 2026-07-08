@@ -205,14 +205,14 @@ export function DynamicMusicPlayer({ title, src }) {
         onLoadedMetadata={onLoadedMetadata}
         onTimeUpdate={onTimeUpdate}
       />
-      <label>
+      <div className="vert container" style={{ gap: "2px" }}>
         <input
           type="checkbox"
           checked={doScrollWithMusic}
           onChange={(e) => setDoScrollWithMusic(e.target.checked)}
         />
-        Scroll with music
-      </label>
+        Scroll along
+      </div>
       <button
         onClick={togglePlayPause}
         className={styles.playerControlBtn}

@@ -11,7 +11,7 @@ import MusicNotation from "../../components/MusicNotation";
 
 export const DISPLAY_NAME = "FL3-33: Chasing the Sun";
 export const DISPLAY_IMAGE = img;
-export const CREATION_DATE = new Date("2021/01/10");
+export const CREATION_DATE = new Date("2026/9/3");
 
 function FL3_33() {
   return (

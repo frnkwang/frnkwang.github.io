@@ -210,7 +210,7 @@ function FL3_33() {
         single bar, but has different rhythms that emphasize it, which makes it
         much more natural (ie, non-robotic) sounding.
       </DynamicMusicSection>
-      <DynamicMusicSection title="Cooling Down" time={"01:49.77"}>
+      <DynamicMusicSection title="Cooling Down" time={"01:49.78"}>
         <p>
           Following the main theme is 3 8-bar phrases that gradually slow down
           the energy. First up is this idea which is still pretty high-energy

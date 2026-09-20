@@ -6,7 +6,6 @@ export default function ScrollToTop() {
 
   useEffect(() => {
     // Instantly scroll to the top-left of the window
-    console.log("SCROLL");
     window.scrollTo(0, 0);
   }, [pathname]);
 

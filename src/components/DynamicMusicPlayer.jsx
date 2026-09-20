@@ -42,6 +42,11 @@ function normalizeTimestampRemoveMicros(timeString) {
   return normalizeTimestamp(timeString).substring(0, 5);
 }
 
+function isDonePlaying(time, duration) {
+  const EPSILON = 0.3;
+  return duration > 0 && time > duration - EPSILON;
+}
+
 const DynamicMusicContext = createContext();
 
 export const useDynamicMusicContext = () => useContext(DynamicMusicContext);
@@ -157,7 +162,19 @@ export function DynamicMusicPlayer({ title, src }) {
   const onLoadedMetadata = () => setDuration(audioRef.current.duration);
   const onTimeUpdate = () => {
     if (isScrubbingRef.current) return;
+
     const time = audioRef.current.currentTime;
+    if (isDonePlaying(time, duration)) {
+      setIsPlaying(false);
+      // rewind to top
+      audioRef.current.currentTime = 0;
+      audioRef.current.load();
+      setCurrentTime(0);
+      if (onMusicTimestampChanged) {
+        onMusicTimestampChanged(0, false);
+      }
+      return;
+    }
     setCurrentTime(time);
     if (onMusicTimestampChanged) {
       onMusicTimestampChanged(time, doScrollWithMusic);

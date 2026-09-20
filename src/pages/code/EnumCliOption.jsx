@@ -28,9 +28,10 @@ function EnumCliOption() {
       <p>
         One of the most common things you might do in a Python script is use
         argparse for command-line argument parsing:
-        <CodeBlock
-          language="python"
-          code={`
+      </p>
+      <CodeBlock
+        language="python"
+        code={`
 import argparse
 
 LUNCH_OPTIONS = ["sandwich", "pasta", "sushi"]
@@ -39,7 +40,8 @@ parser = argparse.ArgumentParser()
 parser.add_argument("--lunch", choices=LUNCH_OPTIONS)
 args = parser.parse_args() # errors if --lunch is an invalid value
 print(args.my_option) # one of LUNCH_OPTIONS`}
-        />
+      />
+      <p>
         As you can see, Python's built-in argparse library provides a pretty
         natural way to allow the user to select from a list of values. This is
         needed fairly often, for example, when selecting from one of a few modes
@@ -53,9 +55,10 @@ print(args.my_option) # one of LUNCH_OPTIONS`}
         argv directly, as well as c-style strings, I tend to just use boost to
         parse arguments. This isn't part of the standard library, but is fairly
         common:
-        <CodeBlock
-          language="cpp"
-          code={`
+      </p>
+      <CodeBlock
+        language="cpp"
+        code={`
 #include <boost/program_options.hpp>
 #include <iostream>
 
@@ -85,7 +88,8 @@ int main(int argc, char *argv[])
     std::cout << "enjoy your " << choice << std::endl;
     return 0;
 }`}
-        />
+      />
+      <p>
         However, this feels clunky to me. For starters, we have to manually
         check that --lunch is a valid option. Python's argparse was able to do
         that for us automatically. But also, using a string here to represent
@@ -101,9 +105,10 @@ int main(int argc, char *argv[])
         That is, what I really want to be able to do in C++ is declare an enum,
         and use boost::program_options to limit the user to select from one of
         those enum types. Something vaguely like this:
-        <CodeBlock
-          language="cpp"
-          code={`
+      </p>
+      <CodeBlock
+        language="cpp"
+        code={`
 #include <boost/program_options.hpp>
 #include <iostream>
 
@@ -134,17 +139,17 @@ int main(int argc, char *argv[])
     std::cout << "enjoy your " << choice << std::endl;
     return 0;
 }`}
-        />
-        Here's the process of how I did this.
-      </p>
+      />
+      <p>Here's the process of how I did this.</p>
       <h4>First guesses</h4>
       <p>
         My first instinct was to use templates. I can't claim to know everything
         about C++, and template metaprogramming always seemed like a bit of
         magic to me. Why not give it a shot?
-        <CodeBlock
-          language="cpp"
-          code={`
+      </p>
+      <CodeBlock
+        language="cpp"
+        code={`
 template<typename... EnumValues>
 class EnumCommandLineOption {
     // magic magic
@@ -155,7 +160,8 @@ class Pasta{};
 class Sushi{};
 
 class Lunch : EnumCommandLineOption<Sandwich, Pasta, Sushi>{};`}
-        />
+      />
+      <p>
         Okay, this seems like an alright interface. I like the simplicity of
         declaring the enum itself. It's a bit odd to have to separately define
         each of the enum values (Sandwich, Pasta, Sushi) as their own class, but
@@ -168,9 +174,10 @@ class Lunch : EnumCommandLineOption<Sandwich, Pasta, Sushi>{};`}
         vice versa. Then EnumCommandLineOption's internals would be able to
         compare the command line input with a string representation of the class
         name and determine which one to use. Something like this:
-        <CodeBlock
-          language="cpp"
-          code={`template <typename... EnumValues>
+      </p>
+      <CodeBlock
+        language="cpp"
+        code={`template <typename... EnumValues>
 class EnumCommandLineOption
 {
 public:
@@ -208,7 +215,8 @@ std::istream &operator>>(std::istream &is, EnumCommandLineOption<EnumValues...> 
     c.setValue(s);
     return is;
 }`}
-        />
+      />
+      <p>
         Here, we're using a template-recursive setValue() member function to
         iterate over all the potential EnumValues we have. For each of them, we
         check if the string value passed in on the command line is equal to the
@@ -218,9 +226,10 @@ std::istream &operator>>(std::istream &is, EnumCommandLineOption<EnumValues...> 
         <br />
         Of course, this requires us to define getName() for each potential class
         we're going to use as an EnumValue:
-        <CodeBlock
-          language="cpp"
-          code={`class Sandwich
+      </p>
+      <CodeBlock
+        language="cpp"
+        code={`class Sandwich
 {
 public:
     static std::string getName()
@@ -244,13 +253,15 @@ public:
         return "Sushi";
     }
 };`}
-        />
+      />
+      <p>
         And for good measure, we should probably also create a constraint on
         this to enforce that everything we instantiate EnumCommandLineOption
         with does indeed have a getName():
-        <CodeBlock
-          language="cpp"
-          code={`template <typename T>
+      </p>
+      <CodeBlock
+        language="cpp"
+        code={`template <typename T>
 concept EnumValue = requires(T a) {
     { T::getName() } -> std::convertible_to<std::string>;
 };
@@ -258,7 +269,8 @@ concept EnumValue = requires(T a) {
 template <typename... EnumValues>
     requires(EnumValue<EnumValues> && ...)
 class EnumCommandLineOption{...}`}
-        />
+      />
+      <p>
         Okay... This is seeming pretty bloated now. It felt somewhat fine to
         define a class for each enum value since that was so little overhead.
         But now we have to also define a getName() function for each? And
@@ -283,9 +295,10 @@ class EnumCommandLineOption{...}`}
         manipulation before compilation, we might as well use this chance to
         improve the syntax of our enum command line option. Here's a relatively
         simple design that I think is hard to argue with:
-        <CodeBlock
-          language="cpp"
-          code={`ENUM_COMMAND_LINE_OPTION(MyTestOption,
+      </p>
+      <CodeBlock
+        language="cpp"
+        code={`ENUM_COMMAND_LINE_OPTION(MyTestOption,
     ValueA,
     ValueB,
     ValueC
@@ -304,16 +317,18 @@ int main(int argc, char* argv[]) {
 
     std::cout << MyTestOption::toString(vm.at("option").as<MyTestOption::Option>()) << std::endl;
 }`}
-        />
+      />
+      <p>
         Great. Let's try to make just this specific case work for now, and we
         can generalize afterwards. We'll pretend to be the preprocessor right
         now - we have four inputs (one enum name; three options) and we can
         place them anywhere in some source code we want to write. Here's the
         specific implementation I came up with. In other words, this is what
         ENUM_COMMAND_LINE_OPTION should expand to:
-        <CodeBlock
-          language="cpp"
-          code={`namespace TestOption{
+      </p>
+      <CodeBlock
+        language="cpp"
+        code={`namespace TestOption{
 
 enum class Option {
     ValueA,
@@ -348,7 +363,8 @@ std::istream& operator>>(std::istream& is, TestOption::Option& option) {
     return is;
 }
 }`}
-        />
+      />
+      <p>
         It's qutie an obvious implementation, actually. We just represent each
         enum value as a string and convert from that. Since we're just
         manipulating the text of a source C++ file (as we're pretending to be
@@ -363,9 +379,10 @@ std::istream& operator>>(std::istream& is, TestOption::Option& option) {
         the ENUM_COMMAND_LINE_OPTION macro. Since we already implemented a
         specific case, this is no more than copy-pasting, then replacing some
         strings with the inputs to the macro itself:
-        <CodeBlock
-          language="cpp"
-          code={`#define PARSE_CASE(value) \\
+      </p>
+      <CodeBlock
+        language="cpp"
+        code={`#define PARSE_CASE(value) \\
     if (str == #value) return Option::value;
 #define TO_STRING_CASE(value) \\
     case Option::value: return #value;
@@ -395,22 +412,25 @@ namespace name { \\
         return is; \\
     } \\
 }`}
-        />
+      />
+      <p>
         One cool thing to notice is that preprocessor macros can also take
         variadic args. In this case, you can't name them - they're always just
         called __VA_ARGS__ and will always expand. Luckily, we can still make
         use of a FOR_EACH macro to help us loop over the variadic args of the
         macro and call other macros like PARSE_CASE and TO_STRING_CASE. Under
         the hood, this uses some other boost macro helpers:
-        <CodeBlock
-          language="cpp"
-          code={`#include <boost/preprocessor.hpp>
+      </p>
+      <CodeBlock
+        language="cpp"
+        code={`#include <boost/preprocessor.hpp>
 
 #define ID_OP(_, f, elem) f(elem)
 
 #define FOR_EACH(macro, ...) \\
     BOOST_PP_SEQ_FOR_EACH(ID_OP, macro, BOOST_PP_VARIADIC_TO_SEQ(__VA_ARGS__))`}
-        />
+      />
+      <p>
         To be completely honest, I don't fully understand how this works yet
         either - I just found it somewhere online. But it does exactly what
         you'd expect it to do!
@@ -430,20 +450,22 @@ namespace name { \\
       <p>
         I don't write much code outside of work anymore, but I think this was a
         good self-contained example of making a feature.
-        <ul>
-          <li>You stumble across something that you think could be better</li>
-          <li>You try some stuff, and it doesn't work or it seems ugly</li>
-          <li>You try some other stuff and things seem promising</li>
-          <li>
-            You start with a specific case, not worrying about generalizability
-            first
-          </li>
-          <li>You go and generalize it</li>
-          <li>
-            You go and google stuff and don't really understand what's going on,
-            but it works (the power of abstraction!)
-          </li>
-        </ul>
+      </p>
+      <ul>
+        <li>You stumble across something that you think could be better</li>
+        <li>You try some stuff, and it doesn't work or it seems ugly</li>
+        <li>You try some other stuff and things seem promising</li>
+        <li>
+          You start with a specific case, not worrying about generalizability
+          first
+        </li>
+        <li>You go and generalize it</li>
+        <li>
+          You go and google stuff and don't really understand what's going on,
+          but it works (the power of abstraction!)
+        </li>
+      </ul>
+      <p>
         These are all things we as programmers like to talk about, but sometimes
         it's easy to forget about them in the actual process of coding and
         debugging. This is a good concrete example of all those ideas we talk

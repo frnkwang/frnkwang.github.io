@@ -89,12 +89,14 @@ function CreatingThisWebsite() {
         suggestion to switch to <a href="https://vite.dev/">Vite</a>. Luckily
         the tutorials there were pretty easy to follow, and in no time, I had a
         basic page up and running using the basic HTML I did still remember:
-        <div className="hori container" style={{ justifyContent: "center" }}>
-          <img
-            src={base_site}
-            style={{ border: "3px solid gray", maxWidth: "70%" }}
-          />
-        </div>
+      </p>
+      <div className="hori container" style={{ justifyContent: "center" }}>
+        <img
+          src={base_site}
+          style={{ border: "3px solid gray", maxWidth: "70%" }}
+        />
+      </div>
+      <p>
         At this point, nothing was dynamic at all. Everything in the above image
         is just raw HTML and a tiny bit of CSS - even the header.
       </p>
@@ -114,12 +116,14 @@ function CreatingThisWebsite() {
         friends, and one immediate suggestion was making the styling better,
         especially on mobile. At the time, the header looked awful on mobile -
         it created a scroll bar:
-        <div className="hori container" style={{ justifyContent: "center" }}>
-          <img
-            src={bad_mobile_header}
-            style={{ border: "3px solid gray", maxWidth: "70%" }}
-          />
-        </div>
+      </p>
+      <div className="hori container" style={{ justifyContent: "center" }}>
+        <img
+          src={bad_mobile_header}
+          style={{ border: "3px solid gray", maxWidth: "70%" }}
+        />
+      </div>
+      <p>
         Now, perhaps the main reason I never enjoyed frontend programming was
         CSS. I never really understood what the hundreds of CSS options and tags
         were and how they could interact with each other on so many browsers.
@@ -132,12 +136,14 @@ function CreatingThisWebsite() {
           Navbar
         </a>{" "}
         which is exactly what I was working on. I imagined something like this:
-        <div className="hori container" style={{ justifyContent: "center" }}>
-          <img
-            src={bootstrap_navbar}
-            style={{ border: "3px solid gray", maxWidth: "70%" }}
-          />
-        </div>
+      </p>
+      <div className="hori container" style={{ justifyContent: "center" }}>
+        <img
+          src={bootstrap_navbar}
+          style={{ border: "3px solid gray", maxWidth: "70%" }}
+        />
+      </div>
+      <p>
         So I got bootstrap and started fiddling around a bit. It took me about
         an hour of struggling to realize that there was a module specifically
         for react with bootstrap:{" "}
@@ -162,12 +168,14 @@ function CreatingThisWebsite() {
         bootstrap altogether and make my own navbar from raw CSS. This turned
         out to be not as hard as I expected, and it's what you see on this page
         today when on mobile.
-        <div className="hori container" style={{ justifyContent: "center" }}>
-          <img
-            src={current_navbar}
-            style={{ border: "3px solid gray", maxWidth: "70%" }}
-          />
-        </div>
+      </p>
+      <div className="hori container" style={{ justifyContent: "center" }}>
+        <img
+          src={current_navbar}
+          style={{ border: "3px solid gray", maxWidth: "70%" }}
+        />
+      </div>
+      <p>
         Perhaps my preconception of CSS being hard just cost me a bunch of time
         this time around.
       </p>
@@ -184,9 +192,11 @@ function CreatingThisWebsite() {
         subpages go in the folder. This allows me to flexibly create new
         top-level pages, and they're not required to have subpages (eg,
         Consumption or About).{" "}
-        <div className="hori container" style={{ justifyContent: "center" }}>
-          <img src={directory_structure} style={{ maxWidth: "70%" }} />
-        </div>
+      </p>
+      <div className="hori container" style={{ justifyContent: "center" }}>
+        <img src={directory_structure} style={{ maxWidth: "70%" }} />
+      </div>
+      <p>
         I could've just as easily chosen to organize all my pages at the top
         level, and within each file, list the category they belonged to. Nothing
         wrong with that, I just chose not to do that.
@@ -206,9 +216,10 @@ function CreatingThisWebsite() {
         <br />
         At its core, all it does is walk the directory structure I listed above
         to discover all the pages and then export them as an array:
-        <CodeBlock
-          language="javascript"
-          code={`
+      </p>
+      <CodeBlock
+        language="javascript"
+        code={`
 const PAGES_DIR = "/src/pages";
 export const ALL_PAGES = Object.entries(
   import.meta.glob("/src/pages/**/*.jsx", {
@@ -226,7 +237,8 @@ export const ALL_PAGES = Object.entries(
     module: module,
   };
 });`}
-        />
+      />
+      <p>
         What really tickled my C++ brain here is that Vite conveniently allows
         us to do this at initialization-time with "eager". This prevents us from
         recalculating the array of pages upon every page reload. Not a major
@@ -242,9 +254,10 @@ export const ALL_PAGES = Object.entries(
         website won't initialize (or, in my C++-pilled brain, it won't compile).
         If these were decoupled, I could still enforce this, but it's now much
         easier to locate where everything related to a single page lives.
-        <CodeBlock
-          language="javascript"
-          code={`
+      </p>
+      <CodeBlock
+        language="javascript"
+        code={`
 import img from "../../assets/this_website.png";
 
 export const DISPLAY_NAME = "Creating This Website";
@@ -257,7 +270,8 @@ function CreatingThisWebsite() {
 
 export default CreatingThisWebsite;
 `}
-        />
+      />
+      <p>
         All in all, I was quite happy with this PageFinder utility. It solves a
         problem that will very obviously come up in the future as I create more
         pages, and it does so in a way that make future me's life very easy:
